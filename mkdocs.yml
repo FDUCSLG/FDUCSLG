@@ -72,6 +72,7 @@ markdown_extensions:
 
 nav:
   - 主页:
+    - 欢迎: index.md
     - 通知: announcement.md
     - 如何贡献: contribute.md
     - Mkdocs 简介: mkdocs-intro.md

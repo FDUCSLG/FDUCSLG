@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
+     <loc>https://zfhu.ac.cn/fdu-msc/</loc>
+     <lastmod>2019-09-25</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://zfhu.ac.cn/fdu-msc/announcement/</loc>
+     <lastmod>2019-09-25</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://zfhu.ac.cn/fdu-msc/contribute/</loc>
+     <lastmod>2019-09-25</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://zfhu.ac.cn/fdu-msc/mkdocs-intro/</loc>
+     <lastmod>2019-09-25</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://zfhu.ac.cn/fdu-msc/share/linux/</loc>
+     <lastmod>2019-09-25</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://zfhu.ac.cn/fdu-msc/share/github/</loc>
      <lastmod>2019-09-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
