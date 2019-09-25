@@ -5,3 +5,13 @@
     {{ super() }}
     <meta name="format-detection" content="telephone=no">
 {% endblock %}
+
+{% block disqus %}
+<script src="https://utteranc.es/client.js"
+        repo="ichn-hu/discussion"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+{% endblock %}

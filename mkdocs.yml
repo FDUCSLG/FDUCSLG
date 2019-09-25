@@ -73,4 +73,9 @@ markdown_extensions:
 nav:
   - 主页:
     - 通知: announcement.md
+    - 如何贡献: contribute.md
+    - Mkdocs 简介: mkdocs-intro.md
+  - 资源分享:
+    - Linux: share/linux.md
+    - GitHub: share/github.md
 
