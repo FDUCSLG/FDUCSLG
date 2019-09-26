@@ -2,14 +2,14 @@
 site_name: 'FDU-MSC 论坛'
 site_description: '技术分享、讨论与学习'
 site_author: 'FDU-MSC'
-site_url: 'https://zfhu.ac.cn/fdu-msc'
+site_url: 'https://fdu-msc.github.io/forum'
 site_dir: 'docs'
 docs_dir: 'content'
-
+edit_uri: 'edit/master/content'
 
 # Repository
-repo_name: 'ichn-hu/fdu-msc'
-repo_url: 'https://github.com/ichn-hu/fdu-msc'
+repo_name: 'fdu-msc/forum'
+repo_url: 'https://github.com/fdu-msc/forum'
 
 # Copyright
 copyright: 'Built by <a href="http://github.com/fdu-msc">FDU-MSC</a> &copy; 2019'
@@ -37,9 +37,9 @@ extra:
     - type: 'github'
       link: 'https://github.com/fdu-msc'
     - type: 'quote-left'
-      link: 'https://fdu-msc.github.io'
+      link: 'https://fdu-msc.github.io/forum'
     - type: 'forum'
-      link: 'https://github.com/ichn-hu/fdu-msc'
+      link: 'https://github.com/fdu-msc/forum'
 
 extra_css:
   - '_static/css/katex.css'
