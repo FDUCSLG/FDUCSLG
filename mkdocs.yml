@@ -1,0 +1,85 @@
+# Project information
+site_name: '今日孵蛋技术论坛'
+site_description: '技术分享、讨论与学习'
+site_author: 'All FDU Tech Lovers!'
+site_url: 'https://fudan-today.github.io/tech.fudan.today'
+site_dir: 'docs'
+docs_dir: 'content'
+edit_uri: 'edit/master/content'
+
+# Repository
+repo_name: 'fudan-today/tech.fudan.today'
+repo_url: 'https://github.com/fudan-today/tech.fudan.today'
+
+# Copyright
+copyright: 'Built by <a href="http://github.com/fudan.today">All FDU Tech Lovers!</a> &copy; 2019'
+
+# Configuration
+theme:
+  name: 'material'
+  language: 'zh'
+  custom_dir: 'custom/'
+  favicon: '_static/assets/logo-temp.png'
+  palette:
+    primary: 'Black'
+    accent: 'Blue'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  logo:
+    icon: 'code'
+  feature:
+    tabs: true
+
+# # Customization
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/fdu-msc'
+    - type: 'quote-left'
+      link: 'https://fdu-msc.github.io/forum'
+    - type: 'forum'
+      link: 'https://github.com/fdu-msc/forum'
+
+extra_css:
+  - '_static/css/katex.css'
+  - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css'
+
+extra_javascript:
+  - '_static/js/katex.js'
+  - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js'
+  - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js'
+
+# Google Analytics
+# google_analytics:
+#   - 'UA-117404761-3'
+#   - 'auto'
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - footnotes
+  - codehilite:
+      linenums: true
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+
+nav:
+  - 主页:
+    - 欢迎: index.md
+    - 通知: announcement.md
+    - 如何贡献: contribute.md
+    - Mkdocs 简介: mkdocs-intro.md
+  - 资源分享:
+    - Linux: share/linux.md
+    - GitHub: share/github.md
+  - 刷题:
+    - 每周一题:
+      - 第三周: oj/9-25.md
+

@@ -1,0 +1,17 @@
+<!-- Fix MathJax rendering on iOS Safari due to rendering long numbers as phone numbers. -->
+{% extends "base.html" %}
+
+{% block site_meta %}
+    {{ super() }}
+    <meta name="format-detection" content="telephone=no">
+{% endblock %}
+
+{% block disqus %}
+<script src="https://utteranc.es/client.js"
+        repo="fudan-today/discussion.tech"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+{% endblock %}
