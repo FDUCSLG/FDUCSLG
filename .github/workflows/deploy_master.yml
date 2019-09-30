@@ -19,6 +19,7 @@ jobs:
     - name: Install mkdocs and theme
       run: |
         sudo apt-get install python3-setuptools
+        pip3 install wheel
         pip3 install mkdocs
         pip3 install mkdocs-material
     - name: Build site
