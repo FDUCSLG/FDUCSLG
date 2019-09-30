@@ -14,6 +14,8 @@ jobs:
       run: |
         python3 --version
         pip3 --version
+        alias python=python3
+        alias pip=pip3
     - name: Install mkdocs and theme
       run: |
         pip3 install mkdocs
