@@ -18,7 +18,7 @@ jobs:
         alias pip=pip3
     - name: Install mkdocs and theme
       run: |
-        apt-get install python3-setuptools
+        sudo apt-get install python3-setuptools
         pip3 install mkdocs
         pip3 install mkdocs-material
     - name: Build site
