@@ -21,10 +21,10 @@ pip install mkdocs-material
 
 这两步完成后（对的，实际上就只有两步，安装 `mkdocs` 和 `mkdocs-material` 就行了），你就可以构建本网站了。
 
-首先你需要把网站的源代码从 GitHub 上扒到你的电脑上。
+首先你需要把网站的源代码从 GitHub 上扒到你的电脑上。本网站的所有内容都开源在 GitHub 上：https://github.com/fudan-today/tech
 
 ```
-git clone 
+git clone https://github.com/fudan-today/tech.git
 ```
 
 
