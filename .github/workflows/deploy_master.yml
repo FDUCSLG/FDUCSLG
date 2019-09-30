@@ -12,12 +12,12 @@ jobs:
     - uses: actions/checkout@v1
     - name: Show python version
       run: |
-        python --version
-        pip --version
+        python3 --version
+        pip3 --version
     - name: Install mkdocs and theme
       run: |
-        pip install mkdocs
-        pip install mkdocs-material
+        pip3 install mkdocs
+        pip3 install mkdocs-material
     - name: Build site
       run: mkdocs build
     - name: Deploy
