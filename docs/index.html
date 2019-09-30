@@ -79,6 +79,31 @@
     
     
       
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-149024530-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -365,6 +390,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="welcome/" title="入站仪式" class="md-nav__link">
+      入站仪式
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -512,6 +549,7 @@
 <p>本站是今日孵蛋组织下的技术社区，由 GitHub 强力驱动（<del>主要是懒得重新开发</del>）！</p>
 <p>我们希望本站能为复旦大学提供技术氛围，培养技术爱好者和黑客精神。</p>
 <p>只要你对技术抱有热情，无论你来自什么专业，我们都欢迎你！</p>
+<p>如果你是第一次访问本站，请完成入站仪式。</p>
                 
                   
                 

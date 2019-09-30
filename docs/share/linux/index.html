@@ -79,6 +79,31 @@
     
     
       
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-149024530-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -350,6 +375,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../welcome/" title="入站仪式" class="md-nav__link">
+      入站仪式
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -514,7 +551,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../mkdocs-intro/" title="Mkdocs 简介" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../welcome/" title="入站仪式" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -523,7 +560,7 @@
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                Mkdocs 简介
+                入站仪式
               </span>
             </div>
           </a>

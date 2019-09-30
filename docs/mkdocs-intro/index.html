@@ -79,6 +79,31 @@
     
     
       
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-149024530-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -404,6 +429,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../welcome/" title="入站仪式" class="md-nav__link">
+      入站仪式
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -580,7 +617,23 @@
                 <p>mkdocs 是用 python 编写的文档生成器，我们也可以使用它来构建静态网站，用来分享信息。同时利用 <a href="https://github.com/utterance/utterances">utterance</a> 我们可以为网站页面添加评论功能，从而可以实现讨论的功能。</p>
 <h2 id="_1">环境搭建<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>为了使用 <code>mkdocs</code> 构建本站，你需要配置好 python 环境。推荐使用 <code>anaconda</code> 来管理环境。</p>
-<p>TODO: 完成这一部分内容</p>
+<div class="admonition note">
+<p class="admonition-title">python 环境配置</p>
+<p>TODO: 添加 python 安装的教程，包括配置清华源</p>
+</div>
+<p>在配置好 python 环境后，你就可以安装 <code>mkdocs</code> 和对应的主题了，</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>conda create -n mkdocs
+conda activate mkdocs
+conda install pip
+<span class="c1"># 上述两步是可选的，用 anaconda 新建一个名为 mkdocs 的环境，并激活它，然后为其安装 pip （ python 的包管理器）</span>
+pip install mkdocs
+</pre></div>
+</td></tr></table>
+
 <h2 id="mkdocs">mkdocs 主题<a class="headerlink" href="#mkdocs" title="Permanent link">&para;</a></h2>
 <p>我们使用 <a href="https://squidfunk.github.io/mkdocs-material/">mkdocs-material</a> 作为网站的主题。关于该主题的配置与使用，请参考<a href="https://squidfunk.github.io/mkdocs-material/">链接</a></p>
 <h2 id="_2">文件结构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -624,13 +677,13 @@
           </a>
         
         
-          <a href="../share/linux/" title="Linux" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../welcome/" title="入站仪式" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                Linux
+                入站仪式
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

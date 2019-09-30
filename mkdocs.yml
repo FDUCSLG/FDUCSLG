@@ -51,9 +51,9 @@ extra_javascript:
   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js'
 
 # Google Analytics
-# google_analytics:
-#   - 'UA-117404761-3'
-#   - 'auto'
+google_analytics:
+  - 'UA-149024530-1'
+  - 'auto'
 
 # Extensions
 markdown_extensions:
@@ -76,6 +76,7 @@ nav:
     - 通知: announcement.md
     - 如何贡献: contribute.md
     - Mkdocs 简介: mkdocs-intro.md
+    - 入站仪式: welcome.md
   - 资源分享:
     - Linux: share/linux.md
     - GitHub: share/github.md

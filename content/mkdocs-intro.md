@@ -5,7 +5,29 @@ mkdocs 是用 python 编写的文档生成器，我们也可以使用它来构�
 
 为了使用 `mkdocs` 构建本站，你需要配置好 python 环境。推荐使用 `anaconda` 来管理环境。
 
-TODO: 完成这一部分内容
+!!! note "python 环境配置"
+    TODO: 添加 python 安装的教程，包括配置清华源
+
+在配置好 python 环境后，你就可以安装 `mkdocs` 和对应的主题了，
+
+```bash
+conda create -n mkdocs
+conda activate mkdocs
+conda install pip
+# 上述三步是可选的，用 anaconda 新建一个名为 mkdocs 的环境，并激活它，然后为其安装 pip （ python 的包管理器）
+pip install mkdocs
+pip install mkdocs-material
+```
+
+这两步完成后（对的，实际上就只有两步，安装 `mkdocs` 和 `mkdocs-material` 就行了），你就可以构建本网站了。
+
+首先你需要把网站的源代码从 GitHub 上扒到你的电脑上。
+
+```
+git clone 
+```
+
+
 
 ## mkdocs 主题
 
