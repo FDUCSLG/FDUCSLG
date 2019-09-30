@@ -7,12 +7,22 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
+    - name: Show python version
+      run: |
+        python --version
+        pip --version
     - name: Install mkdocs and theme
       run: |
-        pip3 install mkdocs
-        pip3 install mkdocs-material
+        pip install mkdocs
+        pip install mkdocs-material
     - name: Build site
       run: mkdocs build
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v2.4.0
+      env:
+        PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./docs
