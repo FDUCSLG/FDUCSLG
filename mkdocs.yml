@@ -78,9 +78,9 @@ nav:
     - Mkdocs 简介: mkdocs-intro.md
     - 入站仪式: welcome.md
   - 资源分享:
-    - Linux: share/linux.md
-    - GitHub: share/github.md
     - Markdown: share/markdown.md
+    - GitHub: share/github.md
+    - Linux: share/linux.md
   - 刷题:
     - 每周一题:
       - 第三周: oj/9-25.md
