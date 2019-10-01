@@ -23,7 +23,7 @@ jobs:
         pip3 install mkdocs
         pip3 install mkdocs-material
     - name: Build site
-      run: mkdocs build
+      run: python3 -m mkdocs build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2.4.0
       env:
