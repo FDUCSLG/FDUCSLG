@@ -80,7 +80,11 @@ nav:
   - 资源分享:
     - Markdown: share/markdown.md
     - GitHub: share/github.md
-    - Linux: share/linux.md
+    - 工具推荐:
+      - 全平台: share/tools/ubiquitous.md
+      - Linux: share/tools/linux.md
+      - Windows: share/tools/windows.md
+      - MacOS: share/tools/macos.md
   - 刷题:
     - 每周一题:
       - 第三周: oj/9-25.md
