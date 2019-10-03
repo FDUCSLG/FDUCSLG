@@ -19,7 +19,7 @@ theme:
   name: 'material'
   language: 'zh'
   custom_dir: 'custom/'
-  favicon: '_static/assets/logo-temp.png'
+  favicon: '/_static/assets/logo-temp.png'
   palette:
     primary: 'Black'
     accent: 'Blue'
