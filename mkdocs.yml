@@ -77,6 +77,15 @@ nav:
     - 如何贡献: contribute.md
     - Mkdocs 简介: mkdocs-intro.md
     - 入站仪式: welcome.md
+  - 建设本站: build/index.md
+  - 课程学习:
+    - 计算机: courses/index.md
+    - 大数据: courses/index.md
+    - 软工: courses/index.md
+  - 技术学习:
+    - 前端开发: technology/index.md
+    - 后端开发: technology/index.md
+    - 深度学习: technology/index.md
   - 资源分享:
     - Markdown: share/markdown.md
     - GitHub: share/github.md
