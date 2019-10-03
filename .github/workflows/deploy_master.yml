@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Show python version
+      run: |
+        python3 --version
+        pip3 --version
+        alias python=python3
+        alias pip=pip3
+    - name: Install mkdocs and theme
+      run: |
+        sudo apt-get install python3-setuptools
+        pip3 install wheel
+        pip3 install mkdocs
+        pip3 install mkdocs-material
+    - name: Build site
+      run: python3 -m mkdocs build
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v2.4.0
+      env:
+        PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./docs

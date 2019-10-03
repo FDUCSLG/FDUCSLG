@@ -1,2 +1,2 @@
 # fdu-msc
-Official forum of FDU-MSC
+Tech forum offered by FDU-MSC
