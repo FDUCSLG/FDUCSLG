@@ -94,7 +94,7 @@ nav:
       - Linux: share/tools/linux.md
       - Windows: share/tools/windows.md
       - MacOS: share/tools/macos.md
-  # - 刷题:
-  #   - 每周一题:
-  #     - 第三周: oj/9-25.md
+  - 刷题:
+    - 每周一题:
+       - 第三周: oj/9-25.md
 
