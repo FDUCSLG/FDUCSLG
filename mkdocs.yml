@@ -74,10 +74,12 @@ nav:
   - 主页:
     - 欢迎: index.md
     - 通知: announcement.md
-    - 如何贡献: contribute.md
-    - Mkdocs 简介: mkdocs-intro.md
     - 入站仪式: welcome.md
-  - 建设本站: build/index.md
+  - 建设本站:
+    - 索引: build/index.md
+    - 如何贡献: build/contribute.md
+    - Mkdocs 简介: build/mkdocs-intro.md
+    - CI/CD: build/CICD.md
   - 课程学习:
     - 计算机: courses/index.md
     - 大数据: courses/index.md
