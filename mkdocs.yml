@@ -2,14 +2,14 @@
 site_name: 'FDU-MSC 论坛'
 site_description: '技术分享、讨论与学习'
 site_author: 'FDU-MSC'
-site_url: 'https://fdu-msc.github.io/forum'
+site_url: 'https://fdu-msc.github.io/forum/'
 site_dir: 'docs'
 docs_dir: 'content'
 edit_uri: 'edit/master/content'
 
 # Repository
 repo_name: 'fdu-msc/forum'
-repo_url: 'https://github.com/fdu-msc/forum'
+repo_url: 'https://github.com/fdu-msc/forum/'
 
 # Copyright
 copyright: 'Built by <a href="http://github.com/fdu-msc">FDU-MSC</a> &copy; 2019'
