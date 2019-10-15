@@ -33,6 +33,17 @@ pip install mkdocs-material
 git clone https://github.com/fdu-msc/forum.git
 ```
 
+扒到本地之后，你就可以在本地构建了
+
+```
+cd forum
+mkdocs serve -a localhost:9999
+```
+
+然后网站就会 host 在你本地的服务器上，通过 [http://localhost:9999](http://localhost:9999) 即可访问。
+
+当你作出任何改动之后，在提交之前，请确保你改动之后的结果能在本地通过编译，即运行 `mkdocs build` 不出现报错信息。
+
 
 
 ## mkdocs 主题
