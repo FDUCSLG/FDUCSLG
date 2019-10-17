@@ -15,4 +15,4 @@
     <img src="/_static/assets/qq_group.jpg" style="width:300px;"></img>
     
 5. 熟悉 GitHub 的基本操作，尝试贡献内容（可选）
-    * [看这里](/contribute)
+    * [看这里](/[$base_url$]contribute)
