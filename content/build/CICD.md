@@ -63,3 +63,5 @@ jobs:
 以上就完成了配置。每当 master 更新时，该 workflow 便会自动触发，重新构建本网站，然后发布到 github pages 上去，从而可以在网页上看到更新的结果。
 
 更高阶的 GitHub Actions 的使用。可以配置一个 Docker 镜像，然后每次拉取镜像来执行构建，这样一来 GitHub Actions 做的事情便没有任何限制了。这部分内容请自行查阅文档~
+
+修改。
