@@ -52,6 +52,6 @@ mkdocs serve -a localhost:9999
 
 ## 文件结构
 
-mkdocs 的配置文件为 `/mkdocs.yaml`, 本网站使用非默认的配置，所有的内容文档存放在 `/content/` 文件夹下，内容文档使用 [`markdown` 语法]([$base_url$]/share/markdown)进行编写。
+mkdocs 的配置文件为 `/mkdocs.yaml`, 本网站使用非默认的配置，所有的内容文档存放在 `/content/` 文件夹下，内容文档使用 [`markdown` 语法](../share/markdown.md)进行编写。
 
 
