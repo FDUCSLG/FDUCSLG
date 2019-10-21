@@ -21,7 +21,7 @@
 	$.ajax({
 		type: "GET",
 		dataType: "json",
-		url: "{{ site_url }}/_static/autherList.json",
+		url: "{{ base_url }}/_static/autherList.json",
 		success: function (result) {
 			allList = eval(result)
 			authorList = allList[fileName]

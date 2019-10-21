@@ -6,6 +6,7 @@ site_url: 'https://fdu-msc.github.io/forum/'
 site_dir: 'docs'
 docs_dir: 'content'
 edit_uri: 'edit/master/content'
+base_url: 'https://fdu-msc.github.io/forum/'
 
 # Repository
 repo_name: 'fdu-msc/forum'
