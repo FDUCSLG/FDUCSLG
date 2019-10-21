@@ -2,49 +2,47 @@
 {% extends "base.html" %}
 
 {% block site_meta %}
-    {{ super() }}
-    <meta name="format-detection" content="telephone=no">
+{{ super() }}
+<meta name="format-detection" content="telephone=no">
 {% endblock %}
 
 
 {% block content %}
- {{ super() }}
+{{ super() }}
 <script type="text/javascript" src="//www.jb51.net/jslib/jquery/jquery.min.js"></script>
 <script type="text/javascript">
-	url=document.location.toString().split("//")[1]
-	firstIndex=url.indexOf("/")
-	fileName=url.substring(firstIndex+1,url.length-1).replace('/','\\')+".md"
+	url = document.location.toString().split("//")[1]
+	firstIndex = url.indexOf("/")
+	fileName = url.substring(firstIndex + 1, url.length - 1) + ".md"
 	console.log(fileName)
-	
-	var parent=document.querySelector("article")
-	var autherListEle=document.createElement("h5")
+
+	var parent = document.querySelector("article")
+	var authorListEle = document.createElement("h5")
 	$.ajax({
-	  type: "GET",
-	  dataType: "json",
-	  url: "/autherList.json",
-	  success: function (result) {
-		allList=eval(result);
-		autherList=allList[fileName]
-		var authers=[]
-		for (var key in autherList){
-			authers.push(key)
+		type: "GET",
+		dataType: "json",
+		url: "{{ site_url }}/_static/autherList.json",
+		success: function (result) {
+			allList = eval(result)
+			authorList = allList[fileName]
+			console.log(allList, fileName, authorList)
+
+			var authors = []
+			for (var key in authorList) {
+				authors.push(key)
+			}
+			authorListEle.innerHTML = "本页面贡献者: " + authors
+			var first = document.querySelector("h1")
+			parent.insertBefore(authorListEle, first.nextSibling)
 		}
-		autherListEle.innerHTML="本页面贡献者: "+authers
-		var first=document.querySelector("h1")
-		parent.insertBefore(autherListEle,first)
-	  }
 	})
-	
-	
+
+
 </script>
 {% endblock %}
 
 {% block disqus %}
-<script src="https://utteranc.es/client.js"
-        repo="fdu-msc/discussion"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
+<script src="https://utteranc.es/client.js" repo="fdu-msc/discussion" issue-term="pathname" theme="github-light"
+	crossorigin="anonymous" async>
+	</script>
 {% endblock %}
