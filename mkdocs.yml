@@ -47,9 +47,6 @@ extra_css:
 
 extra_javascript:
   - '_static/js/katex.js'
-  - '_static/js/config.js'
-  - '_static/js/utils/variable_list.js'
-  - '_static/js/utils/variablize.js'
   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js'
   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js'
 
