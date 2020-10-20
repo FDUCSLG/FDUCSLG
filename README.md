@@ -1,2 +1,5 @@
-# fdu-msc
-Tech forum offered by FDU-MSC
+# FDUCSLG 网站
+
+FDUCSLG 是一个由复旦技术爱好者们发起的一个组织，全称为复旦技术爱好者小组。
+
+本仓库为小组网站的源代码。

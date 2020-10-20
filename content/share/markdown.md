@@ -48,4 +48,4 @@ Markdown 是支持富文本的标记语言。富文本（ rich text ）是相对
 
 另外使用 VSCode 来编辑 markdown 文件，然后用 Markdown All in One 这个插件来预览也是非常不错的选择（非常 geek，实际上本网站就是这么写出来的 lol）
 
-![](/_static/assets/vscode-markdown.png)
+![](/static/assets/vscode-markdown.png)

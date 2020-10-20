@@ -23,6 +23,6 @@ if __name__ == "__main__":
 			i += 2
 		allList[filename[8:]] = autherList
 		
-	with open("content/_static/autherList.json","w") as f:
+	with open("content/static/autherList.json","w") as f:
 		json.dump(allList,f)
 		

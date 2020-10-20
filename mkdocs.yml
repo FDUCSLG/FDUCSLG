@@ -1,26 +1,26 @@
 # Project information
-site_name: 'FDU-MSC 论坛'
+site_name: 'FDUCSLG'
 site_description: '技术分享、讨论与学习'
-site_author: 'FDU-MSC'
-site_url: 'https://fdu-msc.github.io/forum/'
+site_author: 'FDUCSLG'
+site_url: 'https://fducslg.github.io/'
 site_dir: 'docs'
 docs_dir: 'content'
 edit_uri: 'edit/master/content'
-base_url: 'https://fdu-msc.github.io/forum/'
+base_url: 'https://fducslg.github.io/'
 
 # Repository
-repo_name: 'fdu-msc/forum'
-repo_url: 'https://github.com/fdu-msc/forum/'
+repo_name: 'fducslg/fducslg'
+repo_url: 'https://github.com/fducslg/fducslg'
 
 # Copyright
-copyright: 'Built by <a href="http://github.com/fdu-msc">FDU-MSC</a> &copy; 2019'
+copyright: 'Built by <a href="http://github.com/fducslg">FDUCSLG</a> &copy; 2020'
 
 # Configuration
 theme:
   name: 'material'
   language: 'zh'
   custom_dir: 'custom/'
-  favicon: '_static/assets/logo.jpeg'
+  favicon: 'static/assets/logo.jpeg'
   palette:
     primary: 'Black'
     accent: 'Blue'
@@ -36,18 +36,18 @@ theme:
 extra:
   social:
     - type: 'github'
-      link: 'https://github.com/fdu-msc'
+      link: 'https://github.com/fducslg'
     - type: 'quote-left'
-      link: 'https://fdu-msc.github.io/forum'
+      link: 'https://fducslg.github.io/'
     - type: 'forum'
-      link: 'https://github.com/fdu-msc/forum'
+      link: 'https://fducslg.github.io/'
 
 extra_css:
-  - '_static/css/katex.css'
+  - 'static/css/katex.css'
   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css'
 
 extra_javascript:
-  - '_static/js/katex.js'
+  - 'static/js/katex.js'
   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js'
   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js'
 
