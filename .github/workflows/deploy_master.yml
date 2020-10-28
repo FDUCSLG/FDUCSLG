@@ -7,25 +7,16 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Show python version
-      run: |
-        python3 --version
-        pip3 --version
-        alias python=python3
-        alias pip=pip3
-    - name: Install mkdocs and theme
-      run: |
-        sudo apt-get install python3-setuptools
-        pip3 install wheel
-        pip3 install mkdocs
-        pip3 install mkdocs-material
-        pip3 install gitpython
+    - uses: actions/checkout@v2
     - name: Build site
       run: |
-        # python3 script/autherList.py
+        docker build . -t book
+        docker run --rm -p 8000:8000 -v ${PWD}:/book book build
+      
+      run: |
+        python3 script/autherList.py
         python3 -m mkdocs build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2.4.0

@@ -27,20 +27,21 @@ theme:
   font:
     text: 'Roboto'
     code: 'Roboto Mono'
-  logo:
-    icon: 'code'
+  icon:
+    logo: material/cloud
   feature:
-    tabs: true
+    - tabs
+    - instant
 
 # # Customization
 extra:
   social:
-    - type: 'github'
+    - icon: 'fontawesome/brands/github-alt'
       link: 'https://github.com/fducslg'
-    - type: 'quote-left'
-      link: 'https://fducslg.github.io/'
-    - type: 'forum'
-      link: 'https://fducslg.github.io/'
+    # - icon: 'quote-left'
+    #   link: 'https://fducslg.github.io/'
+    # - icon: 'forum'
+    #   link: 'https://fducslg.github.io/'
 
 extra_css:
   - 'static/css/katex.css'
