@@ -12,12 +12,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build site
       run: |
-        docker build . -t book
-        docker run --rm -p 8000:8000 -v ${PWD}:/book book build
-      
-      run: |
-        python3 script/autherList.py
-        python3 -m mkdocs build
+        docker build . -t cslg
+        docker run --rm -p 8000:8000 -v ${PWD}:/site cslg
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2.4.0
       env:
