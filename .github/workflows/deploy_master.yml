@@ -25,7 +25,7 @@ jobs:
         pip3 install gitpython
     - name: Build site
       run: |
-        python3 script/autherList.py
+        # python3 script/autherList.py
         python3 -m mkdocs build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2.4.0
