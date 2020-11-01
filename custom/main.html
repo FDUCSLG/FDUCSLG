@@ -10,45 +10,40 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-48NJ9M3XH1');
 </script>
 {% endblock %}
 
-
 {% block content %}
 {{ super() }}
-<script type="text/javascript" src="//www.jb51.net/jslib/jquery/jquery.min.js"></script>
+
+
+{% if git_page_authors %}
+<div id="authors" class="md-source-date">
+  <small>
+	本页贡献者:
+	{% if git_info %}
+      {%- for author in git_info.get('page_authors') -%}
+	    {% if loop.index != 1 %}
+	      ,
+		{% endif %}
+		<a href="https://github.com/{{ author.name }}" title="{{ author.name }}">
+		{{ author.name }} {{ author.contribution }}
+		</a>
+  	  {%- endfor -%}
+	{% endif %}
+  </small>
+</div>
 <script type="text/javascript">
-	url = document.location.toString().split("//")[1]
-	firstIndex = url.indexOf("/")
-	fileName = url.substring(firstIndex + 1, url.length - 1) + ".md"
-	console.log(fileName)
-
-	var parent = document.querySelector("article")
-	var authorListEle = document.createElement("h5")
-	$.ajax({
-		type: "GET",
-		dataType: "json",
-		url: "{{ base_url }}/static/authorList.json",
-		success: function (result) {
-			allList = eval(result)
-			authorList = allList[fileName]
-			console.log(allList, fileName, authorList)
-
-			var authors = []
-			for (var key in authorList) {
-				authors.push(key)
-			}
-			authorListEle.innerHTML = "本页面贡献者: " + authors
-			var first = document.querySelector("h1")
-			parent.insertBefore(authorListEle, first.nextSibling)
-		}
-	})
-
-
+	const title = document.querySelector("h1");
+	const authors = document.querySelector("#authors");
+	console.log(authors, title, title.nextSibling)
+	title.parentNode.insertBefore(authors, title.nextSibling);
 </script>
+{% endif %}
+
 {% endblock %}
+
 
 {% block disqus %}
 <script src="https://utteranc.es/client.js"

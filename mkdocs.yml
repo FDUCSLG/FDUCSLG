@@ -30,7 +30,7 @@ theme:
     logo: material/cloud
   features:
     - tabs
-    - instant
+    # - instant
     - navigation.expand
 
 # # Customization
@@ -43,14 +43,18 @@ extra:
     # - icon: 'forum'
     #   link: 'https://fducslg.github.io/'
 
-extra_css:
-  - 'static/css/katex.css'
-  - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css'
+# extra_css:
+#   - 'static/css/katex.css'
+#   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css'
 
-extra_javascript:
-  - 'static/js/katex.js'
-  - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js'
-  - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js'
+# extra_javascript:
+#   - 'static/js/katex.js'
+#   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js'
+#   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js'
+
+plugins:
+  - search
+  - git-authors
 
 # Extensions
 markdown_extensions:
@@ -70,33 +74,33 @@ markdown_extensions:
 nav:
   - 主页:
     - 欢迎: index.md
-    - 通知: announcement.md
-    - 入站仪式: welcome.md
+    # - 通知: announcement.md
+    # - 入站仪式: welcome.md
   - 博客:
     - TBA.md
-  - 建设本站:
-    - 索引: build/index.md
-    - 如何贡献: build/contribute.md
-    - Mkdocs 简介: build/mkdocs-intro.md
-    - CI/CD: build/CICD.md
-  - 课程学习:
-    - 计算机: courses/index.md
-    - 大数据: courses/index.md
-    - 软工: courses/index.md
-  - 技术学习:
-    - 前端开发: technology/index.md
-    - 后端开发: technology/index.md
-    - 深度学习: technology/index.md
-  - 资源分享:
-    - Markdown: share/markdown.md
-    - GitHub: share/github.md
-    - 工具推荐:
-      - 全平台: share/tools/ubiquitous.md
-      - Linux: share/tools/linux.md
-      - Windows: share/tools/windows.md
-      - MacOS: share/tools/macos.md
-  - 刷题:
-    - 每周一题:
-       - 第三周: oj/9-25.md
-       - 第五周: oj/10-13.md
+  # - 建设本站:
+  #   - 索引: build/index.md
+  #   - 如何贡献: build/contribute.md
+  #   - Mkdocs 简介: build/mkdocs-intro.md
+  #   - CI/CD: build/CICD.md
+  # - 课程学习:
+  #   - 计算机: courses/index.md
+  #   - 大数据: courses/index.md
+  #   - 软工: courses/index.md
+  # - 技术学习:
+  #   - 前端开发: technology/index.md
+  #   - 后端开发: technology/index.md
+  #   - 深度学习: technology/index.md
+  # - 资源分享:
+  #   - Markdown: share/markdown.md
+  #   - GitHub: share/github.md
+  #   - 工具推荐:
+  #     - 全平台: share/tools/ubiquitous.md
+  #     - Linux: share/tools/linux.md
+  #     - Windows: share/tools/windows.md
+  #     - MacOS: share/tools/macos.md
+  # - 刷题:
+  #   - 每周一题:
+  #      - 第三周: oj/9-25.md
+  #      - 第五周: oj/10-13.md
 

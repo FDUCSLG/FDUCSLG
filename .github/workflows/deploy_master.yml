@@ -13,7 +13,7 @@ jobs:
     - name: Build site
       run: |
         docker build . -t cslg
-        docker run --rm -p 8000:8000 -v ${PWD}:/site cslg
+        docker run --env MKDOCS_GIT_COMMITTERS_APIKEY=${{ secrets.MKDOCS_GIT_COMMITTERS_APIKEY }} --rm -p 8000:8000 -v ${PWD}:/site cslg
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2.4.0
       env:

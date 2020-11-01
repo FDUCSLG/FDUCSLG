@@ -1,4 +1,5 @@
 FROM squidfunk/mkdocs-material
+RUN pip3 install mkdocs-git-authors-plugin
 # WORKDIR /plugins
 # COPY plugins /plugins
 # RUN \
