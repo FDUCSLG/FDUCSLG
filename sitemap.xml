@@ -1,87 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>https://fducslg.github.io/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/announcement/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/announcement/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/welcome/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/welcome/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/build/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/TBA/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/build/contribute/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/build/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/build/mkdocs-intro/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/build/contribute/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/build/CICD/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/build/mkdocs-intro/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/courses/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/build/CICD/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/courses/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/courses/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/courses/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/courses/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/technology/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/courses/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/technology/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/technology/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/technology/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/technology/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/share/markdown/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/technology/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/share/github/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/share/markdown/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/share/tools/ubiquitous/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/share/github/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/share/tools/linux/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/share/tools/ubiquitous/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/share/tools/windows/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/share/tools/linux/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/share/tools/macos/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/share/tools/windows/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/oj/9-25/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/share/tools/macos/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://fducslg.github.io/oj/10-13/</loc>
-     <lastmod>2020-10-28</lastmod>
+     <loc>https://cslg.info/oj/9-25/</loc>
+     <lastmod>2020-11-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://cslg.info/oj/10-13/</loc>
+     <lastmod>2020-11-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
