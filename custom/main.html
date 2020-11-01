@@ -4,6 +4,15 @@
 {% block site_meta %}
 {{ super() }}
 <meta name="format-detection" content="telephone=no">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48NJ9M3XH1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-48NJ9M3XH1');
+</script>
 {% endblock %}
 
 
@@ -21,7 +30,7 @@
 	$.ajax({
 		type: "GET",
 		dataType: "json",
-		url: "{{ base_url }}/static/autherList.json",
+		url: "{{ base_url }}/static/authorList.json",
 		success: function (result) {
 			allList = eval(result)
 			authorList = allList[fileName]
@@ -42,7 +51,12 @@
 {% endblock %}
 
 {% block disqus %}
-<script src="https://utteranc.es/client.js" repo="fdu-msc/discussion" issue-term="pathname" theme="github-light"
-	crossorigin="anonymous" async>
-	</script>
+<script src="https://utteranc.es/client.js"
+        repo="fducslg/fducslg"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
 {% endblock %}

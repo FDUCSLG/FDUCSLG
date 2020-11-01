@@ -3,7 +3,8 @@ FROM squidfunk/mkdocs-material
 # COPY plugins /plugins
 # RUN \
 #   pip install --no-cache-dir .
-
 WORKDIR /site
 # Start development server by default
-ENTRYPOINT ["/site/build.sh"]
+EXPOSE 8000
+ENTRYPOINT ["/bin/sh"]
+CMD ["build.sh"]

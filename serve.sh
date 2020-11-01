@@ -1,4 +1,3 @@
 #! /bin/sh
 python3 script/autherList.py
-mkdocs build
-echo cslg.info > docs/CNAME
+mkdocs serve -a 0.0.0.0:8000

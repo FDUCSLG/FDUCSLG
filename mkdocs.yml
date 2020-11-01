@@ -2,11 +2,10 @@
 site_name: 'FDUCSLG'
 site_description: '技术分享、讨论与学习'
 site_author: 'FDUCSLG'
-site_url: 'https://fducslg.github.io/'
+site_url: 'https://cslg.info/'
 site_dir: 'docs'
 docs_dir: 'content'
 edit_uri: 'edit/master/content'
-base_url: 'https://fducslg.github.io/'
 
 # Repository
 repo_name: 'fducslg/fducslg'
@@ -20,7 +19,7 @@ theme:
   name: 'material'
   language: 'zh'
   custom_dir: 'custom/'
-  favicon: 'static/assets/logo.jpeg'
+  favicon: 'static/assets/logo.jpg'
   palette:
     primary: 'Black'
     accent: 'Blue'
@@ -29,9 +28,10 @@ theme:
     code: 'Roboto Mono'
   icon:
     logo: material/cloud
-  feature:
+  features:
     - tabs
     - instant
+    - navigation.expand
 
 # # Customization
 extra:
@@ -51,11 +51,6 @@ extra_javascript:
   - 'static/js/katex.js'
   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js'
   - 'https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js'
-
-# Google Analytics
-google_analytics:
-  - 'UA-149024530-1'
-  - 'auto'
 
 # Extensions
 markdown_extensions:
@@ -77,6 +72,8 @@ nav:
     - 欢迎: index.md
     - 通知: announcement.md
     - 入站仪式: welcome.md
+  - 博客:
+    - TBA.md
   - 建设本站:
     - 索引: build/index.md
     - 如何贡献: build/contribute.md
