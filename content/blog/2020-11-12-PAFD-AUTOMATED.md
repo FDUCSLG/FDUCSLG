@@ -91,6 +91,9 @@ Name 为 `PASSWORD` 的在 Value 里填入 UIS 密码（即学号密码）。这
 
 ![干杯](../static/assets/pafd-ganbei.JPG)
 
+!!! warning
+    注意，本工具仅限于学习交流，顺便减轻忘记填写 PAFD 的麻烦。如果你身体有任何不适，或者去过有疫情风险的地区，请及时手动填写汇报，并向辅导员报备！本工具不承担任何因为特殊情况不及时报备而造成的风险。
+
 [^4]: 前提是你点击触发的当天还没有手动填过 PAFD
 
 [^3]: GitHub Action 是 GitHub 推出的一款服务，可以做到定时运行脚本，本机器人所使用的 action 代码可见[此](https://github.com/FDUCSLG/pafd-automated/blob/master/.github/workflows/automate.yml)，建议你可以尝试修改自动填写的时间，从 10 点改到 11 点或者任何一个时间，避免所有人都在十点填写，对学校 PAFD 服务器造成过大压力。改写方法为，进入你 fork 的代码仓库，找到 `pafd-automated/.github/workflows/automate.yml` 文件，然后点击代码右上角的铅笔符号，修改文件，然后把 `cron: '0 2 * * *'` 中的 `2` 改成 其他 24 以内的数字（注意这里的 2 表示 UTC 2 a.m.，即北京时间 10 点，如果你改成 3 ，则自动触发时间就是北京时间 11 点）
