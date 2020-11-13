@@ -12,12 +12,12 @@
       
       
       
-        <link rel="canonical" href="https://cslg.info/welcome/">
+        <link rel="canonical" href="https://cslg.info/blog/2020-11-12-PAFD-AUTOMATED/">
       
       
         <meta name="author" content="FDUCSLG">
       
-      <link rel="shortcut icon" href="../static/assets/logo.jpg">
+      <link rel="shortcut icon" href="../../static/assets/logo.jpg">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.4">
     
 <meta name="format-detection" content="telephone=no">
@@ -32,14 +32,14 @@
 
     
       
-        <title>Welcome - FDUCSLG</title>
+        <title>如何自动填写 PAFD！ - FDUCSLG</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.358818c7.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.358818c7.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.f0267088.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f0267088.min.css">
         
           
           
@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#pafd" class="md-skip">
           跳转至
         </a>
       
@@ -109,7 +109,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Welcome
+              如何自动填写 PAFD！
             
           </span>
         </div>
@@ -230,7 +230,7 @@
 
 
   <li class="md-nav__item">
-    <a href=".." class="md-nav__link">
+    <a href="../.." class="md-nav__link">
       欢迎
     </a>
   </li>
@@ -268,7 +268,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../blog/" class="md-nav__link">
+    <a href="../" class="md-nav__link">
       博客
     </a>
   </li>
@@ -293,6 +293,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="目录">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -301,8 +303,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    迎新入站仪式
+  <a href="#github" class="md-nav__link">
+    步骤一：注册 GitHub 帐号
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fork" class="md-nav__link">
+    步骤二：fork 机器人代码
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pafd_1" class="md-nav__link">
+    步骤三：躺着等机器人自动帮你填 PAFD！
   </a>
   
 </li>
@@ -320,41 +336,77 @@
               
 
                 
-                  <a href="https://github.com/fducslg/fducslg/edit/master/content/welcome.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/fducslg/fducslg/edit/master/content/blog/2020-11-12-PAFD-AUTOMATED.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                  <h1>Welcome</h1>
-                
-                <h2 id="_1">迎新入站仪式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>为了更好地参与到网站的讨论与建设中来，你需要完成下述仪式：</p>
+                <h1 id="pafd">如何自动填写 PAFD！<a class="headerlink" href="#pafd" title="Permanent link">&para;</a></h1>
+<p>如果你受够了每天都忘记填 PAFD 带来的痛（kuai）苦（le）</p>
+<p><center>
+<img alt="早上好" src="../../static/assets/pafd-morning.JPG" />
+</center></p>
+<p>如果你再也不想为 PAFD 而烦恼</p>
+<p><center>
+<img alt="又忘记填了" src="../../static/assets/pafd-cry.JPG" />
+</center></p>
+<p>如果你希望每天都能填 PAFD</p>
+<p><center>
+<img alt="又忘记填了" src="../../static/assets/pafd-everyday.jpeg" />
+</center></p>
+<p>那么你来对地方了！</p>
+<p>我们开源了一个<a href="https://github.com/FDUCSLG/pafd-automated">自动填写 PAFD 的机器人</a>，只需要你按照本文步骤完成操作，你就可以免费拥有它！</p>
+<p>这个机器人可以在每天 10 点的时候自动登录 PAFD 并使用你上次填写时的位置自动上报，而所有你需要做的，只不过是动动鼠标完成配置~</p>
+<p>心动的话请继续看下去~</p>
+<h2 id="github">步骤一：注册 GitHub 帐号<a class="headerlink" href="#github" title="Permanent link">&para;</a></h2>
+<p>如果你还没有 GitHub 帐号，那么首先请先注册一个。</p>
+<p>点击 <a href="https://github.com/join">Join GitHub</a> 注册，填入用户名、邮箱和密码即可。</p>
+<p>注意，如果你的网络环境不够好，在电脑上注册可能刷不出验证码，那么你可以尝试在手机浏览器中打开上述链接注册<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>，或者多试几次。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>如果你遇到了注册上的问题，欢迎到我们的 slack 频道中提问！使用学号邮箱点击 <a href="https://join.slack.com/t/fducslg/signup">https://join.slack.com/t/fducslg/signup</a> 注册即可！</p>
+</div>
+<h2 id="fork">步骤二：fork 机器人代码<a class="headerlink" href="#fork" title="Permanent link">&para;</a></h2>
+<p>GitHub 是一个代码托管平台，我们的开源 PAFD 机器人也托管在 GitHub 上。</p>
+<p>点击 <a href="https://github.com/FDUCSLG/pafd-automated">pafd-automated</a> 打开我们的 PAFD 机器人代码仓库，然后点击右上角的 <strong>fork</strong> 按钮。</p>
+<p><img alt="fork" src="../../static/assets/pafd-fork.png" /></p>
+<p>然后你就会发现，在你自己的帐号下也出现了一个一样的代码仓库，这就是你 fork 出来的、属于你的代码仓库。</p>
+<p><img alt="forked" src="../../static/assets/pafd-forked.png" /></p>
+<p>然后点击上图提示的 <strong>Settings</strong> 进入设置页面。</p>
+<p><img alt="setting" src="../../static/assets/pafd-setting.png" /></p>
+<p>然后我们来添加账户信息，用于 PAFD 打卡。点击 <strong>Secrets</strong> 然后点击 <strong>New repository secret</strong>，然后分别添加名为 <code>STD_ID</code> 和 <code>PASSWORD</code> 的两个秘密。</p>
+<p>Name 为 <code>STD_ID</code> 的在 Value 里填入学号</p>
+<p><img alt="std id" src="../../static/assets/pafd-std-id.png" /></p>
+<p>Name 为 <code>PASSWORD</code> 的在 Value 里填入 UIS 密码（即学号密码）。这里可以不用担心安全性问题，在你 fork 的代码仓库下，这些密码只有你可以看到，其他任何人都不行<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>。因为背后是 GitHub 为你保障安全，作为世界上最大规模的程序托管平台，其安全性值得信赖。</p>
+<p><img alt="password" src="../../static/assets/pafd-password.png" /></p>
+<p>添加完成后可以看到</p>
+<p><img alt="added" src="../../static/assets/pafd-added.png" /></p>
+<h2 id="pafd_1">步骤三：躺着等机器人自动帮你填 PAFD！<a class="headerlink" href="#pafd_1" title="Permanent link">&para;</a></h2>
+<p>通过 GitHub Action<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">4</a></sup>，每天十点会自动运行脚本帮你填写 PAFD，填写的地址是上一次的位置，从而你再也不用担心被辅导员催啦~</p>
+<p>如果你按耐不住，想手动触发自动填写，可以来到 action 页面</p>
+<p><img alt="action" src="../../static/assets/pafd-action.png" /></p>
+<p>然后按照图示的顺序点击自动触发 workflow，如果你上述配置是正确的，那么你就可以期待自动填写成功啦<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">3</a></sup>！</p>
+<p>如果你在这个过程中遇到任何问题，都欢迎来我们的 slack 群组中询问~使用学号邮箱点击 <a href="https://join.slack.com/t/fducslg/signup">https://join.slack.com/t/fducslg/signup</a> 注册即可！</p>
+<p>如果你的网络条件足够好，你也可以在本页面下方看到一个评论区，你可以使用 GitHub 帐号进行评论~</p>
+<p>最后</p>
+<p><img alt="干杯" src="../../static/assets/pafd-ganbei.JPG" /></p>
+<div class="footnote">
+<hr />
 <ol>
-<li>注册 GitHub 帐号，<a href="https://github.com/join?source=header-home">点此注册</a><ul>
-<li>你需要使用你的常有邮箱来注册，以便于即时接收到邮件通知</li>
-<li>在 subscription 那一段选择免费的计划即可</li>
-</ul>
+<li id="fn:1">
+<p><a href="https://m.yisu.com/zixun/96667.html">GitHub注册失败，卡在第一步</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
-<li>在下面讨论区留言，和大家 say hi!<ul>
-<li>在下方 utterance 点击登录并授权即可回复</li>
-</ul>
+<li id="fn:2">
+<p>实际上你自己也只有在填写的时候能看到内容，填写完成后，你也无法看到具体内容了&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
-<li>关注本项目（可选），在<a href="https://github.com/fudan-today/tech">项目 repo 页面</a>左上角点击 watch ，这样网站的每次更新都会通过邮件的方式提醒到你（虽然可能会比较吵）</li>
-<li>
-<p>申请加入组织（可选）</p>
-<ul>
-<li><del>准备拉个 QQ 群 QwQ</del></li>
-<li>扫码加群~，群号：923885108</li>
-</ul>
-<p><img alt="" src="../static/assets/qq_group.jpg" /></p>
+<li id="fn:4">
+<p>前提是你点击触发的当天还没有手动填过 PAFD&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
-<li>
-<p>熟悉 GitHub 的基本操作，尝试贡献内容（可选）</p>
-<ul>
-<li><a href="../build/contribute/">看这里</a></li>
-</ul>
+<li id="fn:3">
+<p>GitHub Action 是 GitHub 推出的一款服务，可以做到定时运行脚本，本机器人所使用的 action 代码可见<a href="https://github.com/FDUCSLG/pafd-automated/blob/master/.github/workflows/automate.yml">此</a>，建议你可以尝试修改自动填写的时间，从 10 点改到 11 点或者任何一个时间，避免所有人都在十点填写，对学校 PAFD 服务器造成过大压力。改写方法为，进入你 fork 的代码仓库，找到 <code>pafd-automated/.github/workflows/automate.yml</code> 文件，然后点击代码右上角的铅笔符号，修改文件，然后把 <code>cron: '0 2 * * *'</code> 中的 <code>2</code> 改成 其他 24 以内的数字（注意这里的 2 表示 UTC 2 a.m.，即北京时间 10 点，如果你改成 3 ，则自动触发时间就是北京时间 11 点）&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
 </ol>
+</div>
                 
               
 
@@ -429,15 +481,15 @@
       
     </div>
     
-      <script src="../assets/javascripts/vendor.7e0ee788.min.js"></script>
-      <script src="../assets/javascripts/bundle.b3a72adc.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../../assets/javascripts/vendor.7e0ee788.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b3a72adc.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
-          base: "..",
+          base: "../..",
           features: ['tabs', 'navigation.expand'],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
