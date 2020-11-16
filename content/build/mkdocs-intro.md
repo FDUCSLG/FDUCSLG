@@ -1,5 +1,9 @@
 
-mkdocs 是用 python 编写的文档生成器，我们也可以使用它来构建静态网站，用来分享信息。同时利用 [utterance](https://github.com/utterance/utterances) 我们可以为网站页面添加评论功能，从而可以实现讨论的功能。
+# 本站建设技术介绍
+
+我们使用 [mkdocs](https://www.mkdocs.org/) 构建本站，并使用了一款优秀的主题 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)。
+
+mkdocs 是用 python 编写的文档生成器，我们也可以使用它来构建静态网站，用来分享信息，请阅读 [mkdocs](https://www.mkdocs.org/) 的文档。同时利用 [utterance](https://github.com/utterance/utterances) 我们可以为网站页面添加评论功能，从而可以实现讨论的功能。
 
 ## 环境搭建
 
