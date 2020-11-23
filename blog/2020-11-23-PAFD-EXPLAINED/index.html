@@ -1,0 +1,605 @@
+<!-- Fix MathJax rendering on iOS Safari due to rendering long numbers as phone numbers. -->
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="技术分享、讨论与学习">
+      
+      
+      
+        <link rel="canonical" href="https://cslg.info/blog/2020-11-23-PAFD-EXPLAINED/">
+      
+      
+        <meta name="author" content="FDUCSLG">
+      
+      <link rel="shortcut icon" href="../../static/assets/logo.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+<meta name="format-detection" content="telephone=no">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48NJ9M3XH1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-48NJ9M3XH1');
+</script>
+
+    
+      
+        <title>自动填写 PAFD 的技术原理 - FDUCSLG</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.196e0c26.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="blue">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pafd" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://cslg.info/" title="FDUCSLG" class="md-header-nav__button md-logo" aria-label="FDUCSLG">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.35 10.03A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.03A6.004 6.004 0 000 14a6 6 0 006 6h13a5 5 0 005-5c0-2.64-2.05-4.78-4.65-4.97z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            FDUCSLG
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              自动填写 PAFD 的技术原理
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/fducslg/fducslg/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fducslg/fducslg
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://cslg.info/" title="FDUCSLG" class="md-nav__button md-logo" aria-label="FDUCSLG">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.35 10.03A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.03A6.004 6.004 0 000 14a6 6 0 006 6h13a5 5 0 005-5c0-2.64-2.05-4.78-4.65-4.97z"/></svg>
+
+    </a>
+    FDUCSLG
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/fducslg/fducslg/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fducslg/fducslg
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" >
+    <label class="md-nav__link" for="nav-1">
+      主页
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="主页" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon"></span>
+        主页
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      欢迎
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    <label class="md-nav__link" for="nav-2">
+      博客
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="博客" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        博客
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" class="md-nav__link">
+      博客
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#http" class="md-nav__link">
+    HTTP 协议机制
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_1" class="md-nav__link">
+    通过调试页面观测 HTTP 请求
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    代码
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    如何自动化地打卡？
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+
+                
+                  <a href="https://github.com/fducslg/fducslg/edit/master/content/blog/2020-11-23-PAFD-EXPLAINED.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="pafd">自动填写 PAFD 的技术原理<a class="headerlink" href="#pafd" title="Permanent link">&para;</a></h1>
+<p>Hi 大家好~这是 CSLG 的第一次技术分享，也是第一篇技术向的博客，希望能让大家学习自动填写 PAFD 的原理。</p>
+<h2 id="http">HTTP 协议机制<a class="headerlink" href="#http" title="Permanent link">&para;</a></h2>
+<p>首先需要介绍的是 PAFD 的填写背后的机制。</p>
+<p>大家应该都习惯了互联网，但是否知道互联网是怎么工作的呢？</p>
+<p>我们日常使用的网络通信本质上就是一个客户端到服务端的通信。这里的客户端（client）可以是我们的手机应用、浏览器等等，而服务端（server）则是各种各样的网络服务提供者的服务器。</p>
+<p>客户端和服务端间的通信通常使用的是 HTTP 协议（或者更安全的 HTTPS，这里我们不多谈）。一次通信过程是由客户端向服务端发起 Request，然后服务端返回一个 Response 结束。</p>
+<p>而通信的内容则是由文本构成的，主要分为 Header 和 Body 两个部分。</p>
+<p>Request Header 描述了这次通信的一些规定，比如说</p>
+<ul>
+<li>Host：即向谁发起请求</li>
+<li>User-Agent：请求由什么样的设备发起，譬如是手机浏览器还是电脑浏览器</li>
+<li>Cookie：告诉服务端自己手上的 Cookie（具体关于 Cookie 的解释可以见下文）</li>
+<li>Content-Type：Body 的格式，通常有表单（form）和 JSON 两种</li>
+</ul>
+<p>Response Header 则通常包括</p>
+<ul>
+<li>Set-Cookie：请客户端设置 Cookie</li>
+<li>Content-Type：返回的 Response 中的 Body 的格式，通常是 <code>text/html</code> 或者 JSON</li>
+</ul>
+<p>而 Body 则是一次通信中最主要的内容。Request 的 Body 通常包含请求的参数，比如登录的 Reqest 就会包含用户名和密码，而 Response 的 Body 则通常包含网页的代码（HTML）和数据等等。</p>
+<p>我们填写 PAFD 的时候，本质上就是我们的浏览器作为客户端代替我们向服务端发起登录、填写的请求，而如果我们可以用代码来完成这一通信过程，我们就不需要手动操作了。</p>
+<p>所以我们要做的第一步就是知道浏览器去访问服务器时，他们之间究竟说了些什么。</p>
+<h2 id="http_1">通过调试页面观测 HTTP 请求<a class="headerlink" href="#http_1" title="Permanent link">&para;</a></h2>
+<p>为此我们需要观测登录、填写时的 http 请求。</p>
+<p>推荐使用 firefox 浏览器，按 F12 进入调试页面，然后选择 Network 并且点击 Persist Log 方便观察网络请求的记录。</p>
+<p>点击 <a href="https://uis.fudan.edu.cn/authserver/login?service=https://zlapp.fudan.edu.cn/site/ncov/fudanDaily">https://uis.fudan.edu.cn/authserver/login?service=https://zlapp.fudan.edu.cn/site/ncov/fudanDaily</a> 然后完成登录进入填写页面，这里我们就可以看到完成登录的一系列请求。</p>
+<p><img alt="../static/assets/pafd-explained/Untitled.png" src="../../static/assets/pafd-explained/Untitled.png" /></p>
+<p>核心步骤有两步，首先是 GET <a href="https://uis.fudan.edu.cn/authserver/login?service=https://zlapp.fudan.edu.cn/site/ncov/fudanDaily">https://uis.fudan.edu.cn/authserver/login?service=https://zlapp.fudan.edu.cn/site/ncov/fudanDaily</a> ，查看 Response 的 Header 可以发现，这里会设置 Cookie</p>
+<p><img alt="../static/assets/pafd-explained/Untitled%201.png" src="../../static/assets/pafd-explained/Untitled%201.png" /></p>
+<p>我们知道网络请求是无状态（stateless）的，因此为了让服务器知道一系列请求是由同一个浏览器会话（session）发出来的，则服务器会在 Response 的 Header 里带上 <code>Set-Cookie</code> 这一项，然后浏览器看到 <code>Set-Cookie</code> 时就会在之后的请求的 Header 中带上这些 Cookie，从而服务器就可以辨认网络请求的来源了。</p>
+<p>在这里设置 Cookie 的意义也是很明显的——如果我们带上服务器发过来的 Cookie 完成了登录，服务器那边就会知道持有这个 Cookie 的浏览器会话是登录过的。</p>
+<p>随后我们看登录的 Post 请求。</p>
+<p><img alt="../static/assets/pafd-explained/Untitled%202.png" src="../../static/assets/pafd-explained/Untitled%202.png" /></p>
+<p>果然，这里的 Request Header 里就带上了刚刚服务器发回来的 Cookie。</p>
+<p>再查看 Body，这里带上的数据包含了用户名（即 ID）和密码，这个比较好理解，那么其他的数据是什么意思呢？</p>
+<p><img alt="../static/assets/pafd-explained/Untitled%203.png" src="../../static/assets/pafd-explained/Untitled%203.png" /></p>
+<p>实际上我们并不用知道其他的数据有什么作用，我们只需要照猫画虎地去模仿即可。</p>
+<p>这些数据的来源肯定是上一次请求传回来的，如果不在 Header 里，那么就在 Body 中。于是我们只要拿着 <code>lt: LT-5977767-yTwd12IpHrtNSi7WNieVybbceroU1M1602170752374-JzxT-cas</code> 这个比较奇特的字符串去第一次的 GET 请求返回的 Body 中查找，就能定位到数据来源。</p>
+<p>果不其然我们在返回的 Body 里找到了我们想要的内容：</p>
+<p><img alt="../static/assets/pafd-explained/Untitled%204.png" src="../../static/assets/pafd-explained/Untitled%204.png" /></p>
+<p>那么我们如何才能从返回的 Body 中提取出这些信息呢？</p>
+<p>最简单的方法就是使用正则表达式（Regular Expression）。</p>
+<p>Body 中我们需要关注的文本如下</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;lt&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;LT-5862132-K1Eus3rDaMuHJd2BNtmzwC0gKL1o701602169717834-I12B-cas&quot;</span><span class="p">/&gt;</span>                                                                                                                                                                                                                 
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;dllt&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;userNamePasswordLogin&quot;</span><span class="p">/&gt;</span>                                                                                          
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;execution&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;e2s1&quot;</span><span class="p">/&gt;</span>                       
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;_eventId&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">/&gt;</span>                      
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;rmShown&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>而我们关心的数据则是像 <code>lt</code>, <code>dllt</code> 或者 <code>LT-xxxx</code>, <code>userNamePasswordLogin</code> 这种，具有很明显的模式（pattern）的子串。正则表达式的威力就在于可以根据描述的模式来匹配字符串。</p>
+<p>通过观察这些模式，这里我们可以写出如下正则表达式</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;([a-zA-Z0-9\-_]+)&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;([a-zA-Z0-9\-_]+)&quot;</span><span class="err">/?</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>大概的意思是，在整个 Body 中寻找这样的表达式，其中</p>
+<ol>
+<li>这个表达式是以 <code>&lt;input type="hidden" name="</code> 开头</li>
+<li>然后是一个由小写字母、大写字母、数字、短横线（dash）或者下划线（underscore）组成的字符串</li>
+<li>然后是 <code>" value="</code></li>
+<li>再一个和 2 相似的字符串</li>
+<li>最后以 <code>"/&gt;</code> 或者 <code>"&gt;</code> 结尾</li>
+</ol>
+<p>这里牵涉到正则表达式的书写语法，不了解的同学可以戳<a href="https://louiszhai.github.io/2016/06/13/regexp/">这里</a>。</p>
+<p>下面推荐一个辅助写正则表达式的网站：<a href="https://regexr.com/5dk7j">regexr.com</a>，可以戳进去看每个字符的意义。</p>
+<p><img alt="../static/assets/pafd-explained/Untitled%205.png" src="../../static/assets/pafd-explained/Untitled%205.png" /></p>
+<p>这样我们就可以提取我们想要的数据，并在登录请求中发给服务器完成登录。</p>
+<p>完成登录之后，我们来看提交打卡信息。</p>
+<p>保持 firefox 网络监控打开，然后我们完成一次打卡。</p>
+<p>可以看到多出来了几次网络请求记录，点击查看。</p>
+<p><img alt="../static/assets/pafd-explained/Untitled%206.png" src="../../static/assets/pafd-explained/Untitled%206.png" /></p>
+<p>可以发现这个 <code>get-info</code> 请求的 Response 中出现了一些有意思的数据——上次打卡的位置和上次打卡的时间。</p>
+<p>然后我们再查看打卡的过程。</p>
+<p>可以发现，网络监控中出现了 save 这一个 POST 请求，很明显，这就是打卡的最核心的那一条请求。</p>
+<p><img alt="../static/assets/pafd-explained/Untitled%207.png" src="../../static/assets/pafd-explained/Untitled%207.png" /></p>
+<p>老规矩，先看 Headers，知道我们要向 <a href="https://zlapp.fudan.edu.cn/ncov/wap/fudan/save"><code>https://zlapp.fudan.edu.cn/ncov/wap/fudan/save</code></a> 发 POST 请求，Content-Type 为 <code>application/x-www-form-urlencoded</code>。</p>
+<p><img alt="../static/assets/pafd-explained/Untitled%208.png" src="../../static/assets/pafd-explained/Untitled%208.png" /></p>
+<p><img alt="../static/assets/pafd-explained/Untitled%209.png" src="../../static/assets/pafd-explained/Untitled%209.png" /></p>
+<p>然后再看 Request 的 Body</p>
+<p><img alt="../static/assets/pafd-explained/Untitled%2010.png" src="../../static/assets/pafd-explained/Untitled%2010.png" /></p>
+<p>Request payload</p>
+<div class="highlight"><pre><span></span><code><span class="nv">tw</span><span class="o">=</span><span class="m">13</span><span class="p">&amp;</span><span class="nv">sfcxtz</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjcbh</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfcxzysx</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">qksm</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfyyjc</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">jcjgqr</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">remark</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">address</span><span class="o">=</span>%E4%B8%8A%E6%B5%B7%E5%B8%82%E6%9D%A8%E6%B5%A6%E5%8C%BA%E4%BA%94%E8%A7%92%E5%9C%BA%E8%A1%97%E9%81%93%E5%9B%9B%E5%B9%B3%E8%B7%AF2548%E5%8F%B7UMAX%E6%82%A0%E8%BF%88%E7%94%9F%E6%B4%BB%E5%B9%BF%E5%9C%BA<span class="p">&amp;</span><span class="nv">geo_api_info</span><span class="o">=</span>%7B%22type%22%3A%22complete%22%2C%22info%22%3A%22SUCCESS%22%2C%22status%22%3A1%2C%22YDa%22%3A%22jsonp_919594_%22%2C%22position%22%3A%7B%22Q%22%3A31.29651%2C%22R%22%3A121.51519000000002%2C%22lng%22%3A121.51519%2C%22lat%22%3A31.29651%7D%2C%22message%22%3A%22Get%20ipLocation%20success.Get%20address%20success.%22%2C%22location_type%22%3A%22ip%22%2C%22accuracy%22%3Anull%2C%22isConverted%22%3Atrue%2C%22addressComponent%22%3A%7B%22citycode%22%3A%22021%22%2C%22adcode%22%3A%22310110%22%2C%22businessAreas%22%3A%5B%7B%22name%22%3A%22%E4%BA%94%E8%A7%92%E5%9C%BA%22%2C%22id%22%3A%22310110%22%2C%22location%22%3A%7B%22Q%22%3A31.301791%2C%22R%22%3A121.51316800000001%2C%22lng%22%3A121.513168%2C%22lat%22%3A31.301791%7D%7D%2C%7B%22name%22%3A%22%E6%B1%9F%E6%B9%BE%22%2C%22id%22%3A%22310110%22%2C%22location%22%3A%7B%22Q%22%3A31.310831%2C%22R%22%3A121.49710900000002%2C%22lng%22%3A121.497109%2C%22lat%22%3A31.310831%7D%7D%5D%2C%22neighborhoodType%22%3A%22%22%2C%22neighborhood%22%3A%22%22%2C%22building%22%3A%22%22%2C%22buildingType%22%3A%22%22%2C%22street%22%3A%22%E5%9B%9B%E5%B9%B3%E8%B7%AF%22%2C%22streetNumber%22%3A%222548%E5%8F%B7%22%2C%22country%22%3A%22%E4%B8%AD%E5%9B%BD%22%2C%22province%22%3A%22%E4%B8%8A%E6%B5%B7%E5%B8%82%22%2C%22city%22%3A%22%22%2C%22district%22%3A%22%E6%9D%A8%E6%B5%A6%E5%8C%BA%22%2C%22township%22%3A%22%E4%BA%94%E8%A7%92%E5%9C%BA%E8%A1%97%E9%81%93%22%7D%2C%22formattedAddress%22%3A%22%E4%B8%8A%E6%B5%B7%E5%B8%82%E6%9D%A8%E6%B5%A6%E5%8C%BA%E4%BA%94%E8%A7%92%E5%9C%BA%E8%A1%97%E9%81%93%E5%9B%9B%E5%B9%B3%E8%B7%AF2548%E5%8F%B7UMAX%E6%82%A0%E8%BF%88%E7%94%9F%E6%B4%BB%E5%B9%BF%E5%9C%BA%22%2C%22roads%22%3A%5B%5D%2C%22crosses%22%3A%5B%5D%2C%22pois%22%3A%5B%5D%7D<span class="p">&amp;</span><span class="nv">area</span><span class="o">=</span>%E4%B8%8A%E6%B5%B7%E5%B8%82%20%E6%9D%A8%E6%B5%A6%E5%8C%BA<span class="p">&amp;</span><span class="nv">province</span><span class="o">=</span>%E4%B8%8A%E6%B5%B7%E5%B8%82<span class="p">&amp;</span><span class="nv">city</span><span class="o">=</span>%E4%B8%8A%E6%B5%B7%E5%B8%82<span class="p">&amp;</span><span class="nv">sfzx</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjcwhry</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjchbry</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfcyglq</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">gllx</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glksrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jcbhlx</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jcbhrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">ismoved</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">bztcyy</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sftjhb</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sftjwh</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">gwszdd</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfpcgr</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">jrszss</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glfs</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glgcdd</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glqsrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">gljsrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">gzdd</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfwztl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sftztl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjcgrq</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfhbtl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sffsksfl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfzgn</span><span class="o">=</span><span class="m">1</span><span class="p">&amp;</span><span class="nv">sfjczgfxry</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfcyglgcq</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">realname</span><span class="o">=</span>%E7%BD%97%E7%BF%94<span class="p">&amp;</span><span class="nv">number</span><span class="o">=</span><span class="m">17307130191</span><span class="p">&amp;</span><span class="nv">fxyy</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">uid</span><span class="o">=</span><span class="m">59817</span><span class="p">&amp;</span><span class="nv">created</span><span class="o">=</span><span class="m">1602860131</span><span class="p">&amp;</span><span class="nv">date</span><span class="o">=</span><span class="m">20201016</span><span class="p">&amp;</span><span class="nv">jcqzrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfjcqz</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jhfjrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">fhjtgj</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">fhjtgjbc</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">id</span><span class="o">=</span><span class="m">10148001</span><span class="p">&amp;</span><span class="nv">sfyqjzgc</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jrsfqzys</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jrsfqzfy</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfyjfx</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjzxnss</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">yjrxsj</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">rzqs</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">dsxm</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">wyyd</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">bzxxzdz</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">xjrdxq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">tjfs</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">fhjtgjzwh</span><span class="o">=</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nv">tw</span><span class="o">=</span><span class="m">13</span><span class="p">&amp;</span>
+<span class="nv">sfcxtz</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+<span class="nv">sfjcbh</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+<span class="nv">sfcxzysx</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+<span class="nv">qksm</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">sfyyjc</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+<span class="nv">jcjgqr</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+<span class="nv">remark</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">address</span><span class="o">=</span>上海市杨浦区五角场街道四平路2548号UMAX悠迈生活广场<span class="p">&amp;</span>
+<span class="nv">geo_api_info</span><span class="o">={</span><span class="s2">&quot;type&quot;</span>:<span class="s2">&quot;complete&quot;</span>,<span class="s2">&quot;info&quot;</span>:<span class="s2">&quot;SUCCESS&quot;</span>,<span class="s2">&quot;status&quot;</span>:1,<span class="s2">&quot;YDa&quot;</span>:<span class="s2">&quot;jsonp_919594_&quot;</span>,<span class="s2">&quot;position&quot;</span>:<span class="o">{</span><span class="s2">&quot;Q&quot;</span>:31.29651,<span class="s2">&quot;R&quot;</span>:121.51519000000002,<span class="s2">&quot;lng&quot;</span>:121.51519,<span class="s2">&quot;lat&quot;</span>:31.29651<span class="o">}</span>,<span class="s2">&quot;message&quot;</span>:<span class="s2">&quot;Get ipLocation success.Get address success.&quot;</span>,<span class="s2">&quot;location_type&quot;</span>:<span class="s2">&quot;ip&quot;</span>,<span class="s2">&quot;accuracy&quot;</span>:null,<span class="s2">&quot;isConverted&quot;</span>:true,<span class="s2">&quot;addressComponent&quot;</span>:<span class="o">{</span><span class="s2">&quot;citycode&quot;</span>:<span class="s2">&quot;021&quot;</span>,<span class="s2">&quot;adcode&quot;</span>:<span class="s2">&quot;310110&quot;</span>,<span class="s2">&quot;businessAreas&quot;</span>:<span class="o">[{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;五角场&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;310110&quot;</span>,<span class="s2">&quot;location&quot;</span>:<span class="o">{</span><span class="s2">&quot;Q&quot;</span>:31.301791,<span class="s2">&quot;R&quot;</span>:121.51316800000001,<span class="s2">&quot;lng&quot;</span>:121.513168,<span class="s2">&quot;lat&quot;</span>:31.301791<span class="o">}}</span>,<span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;江湾&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;310110&quot;</span>,<span class="s2">&quot;location&quot;</span>:<span class="o">{</span><span class="s2">&quot;Q&quot;</span>:31.310831,<span class="s2">&quot;R&quot;</span>:121.49710900000002,<span class="s2">&quot;lng&quot;</span>:121.497109,<span class="s2">&quot;lat&quot;</span>:31.310831<span class="o">}}]</span>,<span class="s2">&quot;neighborhoodType&quot;</span>:<span class="s2">&quot;&quot;</span>,<span class="s2">&quot;neighborhood&quot;</span>:<span class="s2">&quot;&quot;</span>,<span class="s2">&quot;building&quot;</span>:<span class="s2">&quot;&quot;</span>,<span class="s2">&quot;buildingType&quot;</span>:<span class="s2">&quot;&quot;</span>,<span class="s2">&quot;street&quot;</span>:<span class="s2">&quot;四平路&quot;</span>,<span class="s2">&quot;streetNumber&quot;</span>:<span class="s2">&quot;2548号&quot;</span>,<span class="s2">&quot;country&quot;</span>:<span class="s2">&quot;中国&quot;</span>,<span class="s2">&quot;province&quot;</span>:<span class="s2">&quot;上海市&quot;</span>,<span class="s2">&quot;city&quot;</span>:<span class="s2">&quot;&quot;</span>,<span class="s2">&quot;district&quot;</span>:<span class="s2">&quot;杨浦区&quot;</span>,<span class="s2">&quot;township&quot;</span>:<span class="s2">&quot;五角场街道&quot;</span><span class="o">}</span>,<span class="s2">&quot;formattedAddress&quot;</span>:<span class="s2">&quot;上海市杨浦区五角场街道四平路2548号UMAX悠迈生活广场&quot;</span>,<span class="s2">&quot;roads&quot;</span>:<span class="o">[]</span>,<span class="s2">&quot;crosses&quot;</span>:<span class="o">[]</span>,<span class="s2">&quot;pois&quot;</span>:<span class="o">[]}</span><span class="p">&amp;</span>
+<span class="nv">area</span><span class="o">=</span>上海市 杨浦区<span class="p">&amp;</span>
+<span class="nv">province</span><span class="o">=</span>上海市<span class="p">&amp;</span>
+<span class="nv">city</span><span class="o">=</span>上海市<span class="p">&amp;</span>
+<span class="nv">sfzx</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+<span class="nv">sfjcwhry</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+<span class="nv">sfjchbry</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+<span class="nv">sfcyglq</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span>
+<span class="nv">gllx</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">glksrq</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">jcbhlx</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jcbhrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">ismoved</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">bztcyy</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sftjhb</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sftjwh</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">gwszdd</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfpcgr</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">jrszss</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glfs</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glgcdd</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glqsrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">gljsrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">gzdd</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfwztl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sftztl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjcgrq</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfhbtl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sffsksfl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfzgn</span><span class="o">=</span><span class="m">1</span><span class="p">&amp;</span><span class="nv">sfjczgfxry</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfcyglgcq</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">realname</span><span class="o">=</span>罗翔<span class="p">&amp;</span><span class="nv">number</span><span class="o">=</span><span class="m">17307130191</span><span class="p">&amp;</span><span class="nv">fxyy</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">uid</span><span class="o">=</span><span class="m">59817</span><span class="p">&amp;</span><span class="nv">created</span><span class="o">=</span><span class="m">1602860131</span><span class="p">&amp;</span><span class="nv">date</span><span class="o">=</span><span class="m">20201016</span><span class="p">&amp;</span><span class="nv">jcqzrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfjcqz</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jhfjrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">fhjtgj</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">fhjtgjbc</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">id</span><span class="o">=</span><span class="m">10148001</span><span class="p">&amp;</span><span class="nv">sfyqjzgc</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jrsfqzys</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jrsfqzfy</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfyjfx</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjzxnss</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">yjrxsj</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">rzqs</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">dsxm</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">wyyd</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">bzxxzdz</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">xjrdxq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">tjfs</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">fhjtgjzwh</span><span class="o">=</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nv">address</span><span class="o">=</span>上海市杨浦区五角场街道复旦大学复旦大学邯郸校区<span class="p">&amp;</span>
+<span class="nv">area</span><span class="o">=</span>上海市++杨浦区<span class="p">&amp;</span>
+<span class="nv">bztcyy</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">bzxxzdz</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">city</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">created</span><span class="o">=</span><span class="m">1</span>.602860131e+09<span class="p">&amp;</span>
+<span class="nv">date</span><span class="o">=</span><span class="m">20201016</span><span class="p">&amp;</span>
+<span class="nv">dsxm</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">fhjtgj</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">fhjtgjbc</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">fhjtgjzwh</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">fxyy</span><span class="o">=</span><span class="p">&amp;</span>
+<span class="nv">geo_api_info</span><span class="o">={</span><span class="s2">&quot;type&quot;</span>:<span class="s2">&quot;complete&quot;</span>,<span class="s2">&quot;position&quot;</span>:<span class="o">{</span><span class="s2">&quot;Q&quot;</span>:31.299896104601,<span class="s2">&quot;R&quot;</span>:121.50722900390701,<span class="s2">&quot;lng&quot;</span>:121.507229,<span class="s2">&quot;lat&quot;</span>:31.299896<span class="o">}</span>,<span class="s2">&quot;location_type&quot;</span>:<span class="s2">&quot;html5&quot;</span>,<span class="s2">&quot;message&quot;</span>:<span class="s2">&quot;Get+geolocation+success.Convert+Success.Get+address+success.&quot;</span>,<span class="s2">&quot;accuracy&quot;</span>:125,<span class="s2">&quot;isConverted&quot;</span>:true,<span class="s2">&quot;status&quot;</span>:1,<span class="s2">&quot;addressComponent&quot;</span>:<span class="o">{</span><span class="s2">&quot;citycode&quot;</span>:<span class="s2">&quot;021&quot;</span>,<span class="s2">&quot;adcode&quot;</span>:<span class="s2">&quot;310110&quot;</span>,<span class="s2">&quot;businessAreas&quot;</span>:<span class="o">[{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;江湾&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;310110&quot;</span>,<span class="s2">&quot;location&quot;</span>:<span class="o">{</span><span class="s2">&quot;Q&quot;</span>:31.310831,<span class="s2">&quot;R&quot;</span>:121.49710900000002,<span class="s2">&quot;lng&quot;</span>:121.497109,<span class="s2">&quot;lat&quot;</span>:31.310831<span class="o">}}</span>,<span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;五角场&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;310110&quot;</span>,<span class="s2">&quot;location&quot;</span>:<span class="o">{</span><span class="s2">&quot;Q&quot;</span>:31.301791,<span class="s2">&quot;R&quot;</span>:121.51316800000001,<span class="s2">&quot;lng&quot;</span>:121.513168,<span class="s2">&quot;lat&quot;</span>:31.301791<span class="o">}}]</span>,<span class="s2">&quot;neighborhoodType&quot;</span>:<span class="s2">&quot;科教文化服务;学校;高等院校&quot;</span>,<span class="s2">&quot;neighborhood&quot;</span>:<span class="s2">&quot;复旦大学&quot;</span>,<span class="s2">&quot;building&quot;</span>:<span class="s2">&quot;&quot;</span>,<span class="s2">&quot;buildingType&quot;</span>:<span class="s2">&quot;&quot;</span>,<span class="s2">&quot;street&quot;</span>:<span class="s2">&quot;国定路&quot;</span>,<span class="s2">&quot;streetNumber&quot;</span>:<span class="s2">&quot;428-2号&quot;</span>,<span class="s2">&quot;country&quot;</span>:<span class="s2">&quot;中国&quot;</span>,<span class="s2">&quot;province&quot;</span>:<span class="s2">&quot;上海市&quot;</span>,<span class="s2">&quot;city&quot;</span>:<span class="s2">&quot;&quot;</span>,<span class="s2">&quot;district&quot;</span>:<span class="s2">&quot;杨浦区&quot;</span>,<span class="s2">&quot;township&quot;</span>:<span class="s2">&quot;五角场街道&quot;</span><span class="o">}</span>,<span class="s2">&quot;formattedAddress&quot;</span>:<span class="s2">&quot;上海市杨浦区五角场街道复旦大学复旦大学邯郸校区&quot;</span>,<span class="s2">&quot;roads&quot;</span>:<span class="o">[]</span>,<span class="s2">&quot;crosses&quot;</span>:<span class="o">[]</span>,<span class="s2">&quot;pois&quot;</span>:<span class="o">[]</span>,<span class="s2">&quot;info&quot;</span>:<span class="s2">&quot;SUCCESS&quot;</span><span class="o">}</span><span class="p">&amp;</span><span class="nv">glfs</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glgcdd</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">gljsrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glksrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">gllx</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">glqsrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">gwszdd</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">gzdd</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">id</span><span class="o">=</span><span class="m">1</span>.0148001e+07<span class="p">&amp;</span><span class="nv">jcbhlx</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jcbhrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jcjgqr</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">jcqzrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jhfjrq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jrdqjcqk</span><span class="o">=[]</span><span class="p">&amp;</span><span class="nv">jrdqtlqk</span><span class="o">=[]</span><span class="p">&amp;</span><span class="nv">jrsfqzfy</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jrsfqzys</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">jrszss</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">province</span><span class="o">=</span>上海市<span class="p">&amp;</span><span class="nv">qksm</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">remark</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">rzqs</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfcxtz</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfcxzysx</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfcyglgcq</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfcyglq</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sffsksfl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjcbh</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjchbry</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjcqz</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfjcwhry</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjczgfxry</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfjzxnss</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfpcgr</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sftjhb</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sftjwh</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sftztl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfwztl</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfyjfx</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfyqjzgc</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">sfyyjc</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">sfzgn</span><span class="o">=</span><span class="m">1</span><span class="p">&amp;</span><span class="nv">sfzx</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">tjfs</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">tw</span><span class="o">=</span><span class="m">13</span><span class="p">&amp;</span><span class="nv">uid</span><span class="o">=</span><span class="m">59817</span><span class="p">&amp;</span><span class="nv">wyyd</span><span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">xjrdxq</span><span class="o">=</span><span class="p">&amp;</span><span class="nv">yjrxsj</span><span class="o">=</span>
+</code></pre></div>
+<p>这里的表单数看起来非常眼熟，去查看之前 get-info 的那个请求的结果，发现竟然是一致的。</p>
+<p>因此可以用 get-info 这个请求返回的上次打卡的位置作为数据发给服务器即可完成打卡。</p>
+<h2 id="_1">代码<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>接下来就是激动人心的代码环节了。</p>
+<p>戳<a href="https://github.com/FDUCSLG/pafd-automated/blob/master/main.py">这里</a>就可以看到一份用 python 实现的自动打卡程序，其工作原理就是上述内容<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>。</p>
+<h2 id="_2">如何自动化地打卡？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>当我们完成了上述程序，即可考虑自动化打卡——每天定时运行一次就行了。</p>
+<p>如果你有一个 linux 服务器，那么你应该知道配置 crontab 或者 systemd 的定时运行，这里就不多展开了。</p>
+<p>但是即便你没有，你也可以很轻松地实现——只需要你有 GitHub 的帐号即可。</p>
+<p>而帮我们完成这一任务的就是 GitHub Action。</p>
+<p>GitHub Action 是一个依附于 GitHub 代码仓库的程序自动运行机制。常常用于持续集成（Continues Integration, CI），即在代码改动提交的时候自动运行测试程序，确保提交的代码不会破坏已有的测试。</p>
+<p>同时，它也额外提供了通过类似 cron job 的定时执行功能。我们所要的就是这个功能。</p>
+<p>GitHub Action 是由 workflow 文件定义的。我们自定义的 <a href="https://github.com/FDUCSLG/pafd-automated/blob/master/.github/workflows/automate.yml">workflow</a> 内容如下</p>
+<div class="highlight"><pre><span></span><code>name: Go
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    # run every 10 a.m., which is UTC 2 a.m + 8
+    - cron:  &#39;0 2 * * *&#39;
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: run
+        run: STD_ID=${{ secrets.STD_ID }} PASSWORD=${{ secrets.PASSWORD }} python3 main.py
+</code></pre></div>
+<p>内容非常简单，<code>on</code> 那一段指定了 workflow 执行的条件，分别是 push master、向 master 提 pull request 或者是定时到了（schedule），这里的 schedule 就是自动执行的秘诀。cron 那一段说的是，每天 2:00 的时候自动执行——之所以是 2:00，是因为 GitHub Action 默认时区是 UTC，对应北京时间就是 10:00。</p>
+<p>workflow 的工作内容。首先检出代码，可以使用 GitHub 提供的已有的 <code>actions/checkout@v2</code>，然后就可以执行我们的代码了——只需要执行 <code>python3 main.py</code> 即可，前面的 <code>STD_ID=${{ secrets.STD_ID }} PASSWORD=${{ secrets.PASSWORD }}</code> 是在通过环境变量的形式把设置的 secret 传给程序。</p>
+<p>以上就完成了对原理的讲解。</p>
+<p>有任何疑问欢迎加入我们的 slack 群组来提问~使用学号邮箱点击 <a href="https://join.slack.com/t/fducslg/signup">https://join.slack.com/t/fducslg/signup</a> 注册即可！</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>本程序的作者是 https://github.com/k652 ，我们只做了小小的改动，感谢 ta 的开源分享&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+
+
+
+<div id="authors" class="md-source-date">
+  <small>
+	本页贡献者:
+	
+		<a href="https://github.com/ichn-hu" title="ichn-hu">
+		ichn-hu 100.0%
+		</a>
+  </small>
+</div>
+<script type="text/javascript">
+	const title = document.querySelector("h1");
+	const authors = document.querySelector("#authors");
+	console.log(authors, title, title.nextSibling)
+	title.parentNode.insertBefore(authors, title.nextSibling);
+</script>
+
+
+
+              
+<script src="https://utteranc.es/client.js"
+        repo="fducslg/fducslg"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Built by <a href="http://github.com/fducslg">FDUCSLG</a> &copy; 2020
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/fducslg" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ['tabs', 'navigation.expand'],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
