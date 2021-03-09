@@ -15,25 +15,27 @@
 
 #### 什么是fdxk.info
 
-fdxk.info (Fudan Xuan Ke Info) 是 FDUCSLG（Fudan Unniversity Computer Science Lovers Group）旗下的网站，旨在解决复旦缺少校内信息交流渠道的问题，目前两大功能为课表、评课，后续会加入更多功能服务校内同学。
+fdxk.info (Fudan Xuan Ke Info) 是 FDUCSLG（Fudan Unniversity Computer Science Lovers Group）旗下的网站，由复旦大学的计算机相关专业的技术爱好者们开发和维护，旨在解决复旦缺少校内信息交流渠道的问题，目前两大功能为课表、评课，后续会加入更多功能服务校内同学。
+
+目前该项目还处在积极开发之中，如果你对此感兴趣，欢迎联系我们！
 
 #### 关于这篇文章
 
-我是 FDUCSLG 的成员李叔禄@Depetrol，最近加入了 fdxk.info 开发组，在胡志峰学长@ichn-hu的指导下安装了 fdxk 的开发环境（不然我可能一周都起不来这个环境hhh），配置完成后写下这篇文章，一方面是以后的开发中可以作为速查，一方面也是方便以后的同学配置开发环境。
+我是 FDUCSLG 的成员李叔禄 [@Depetrol](https://github.com/Depetrol)，最近加入了 fdxk.info 开发组，在胡志峰学长 [@ichn-hu](https://github.com/ichn-hu) 的指导下安装了 fdxk 的开发环境（不然我可能一周都起不来这个环境hhh），配置完成后写下这篇文章，一方面是以后的开发中可以作为速查，一方面也是方便以后的同学配置开发环境。
 
 ## 熟悉 Terminal
 
-本文的系统环境为macos，在你的系统上运行的结果有可能不同
+本文的系统环境为 MacOS，CPU 架构为 Apple M1，下述过程在你的系统上的结果有可能不同。
 
 terminal 是系统内置的命令行，可以通过向 terminal 中输入命令来操作系统，而这在配置环境中可以为我们提供许多便利，甚至许多操作只能在 terminal 中进行
 
-下面是 terminal 中的一些操作，每输入一行命令后按`enter`来执行命令
+下面是 terminal 中的一些操作，每输入一行命令后按 `enter` 来执行命令
 
 在下面的介绍中，标题会介绍命令的基本功能，具体的使用方法需要自己执行下面的命令观察结果
 
 - 目录操作:  `ls` `cd` `pwd` `rm`
 - 文件操作:  `touch`  ` cat ` ` mv `  ` rm`
-- 进程操作:  `top` 显示进程 ( `htop` : 更加便于使用的进程显示，需要安装 ) 
+- 进程操作:  `top` 显示进程 ( `htop` : 更加便于使用的进程显示，界面更加美观，但需要额外安装 `brew install htop` ) 
 
 ### ls 列出当前文件夹下的所有文件和文件夹
 
@@ -41,6 +43,7 @@ terminal 是系统内置的命令行，可以通过向 terminal 中输入命令�
 ls
 ls -a
 ls -l
+ls -h
 ```
 
 ### pwd 显示当前 terminal 所在的目录
@@ -52,8 +55,11 @@ pwd
 ### cd 进入目录
 
 ```bash
+# 进入根目录
 cd /
+# 进入用户家目录
 cd ~
+# 回到上层目录
 cd ..
 ```
 
@@ -68,6 +74,14 @@ cat hello.txt
 ```bash
 ./[文件名]
 /bin/date
+```
+
+### chmod 修改文件权限。
+
+如果你希望一个文件有可执行权限：
+
+```bash
+chmod a+x <file>
 ```
 
 ### clear 清空终端中存在的已经执行过的命令
@@ -117,14 +131,6 @@ rm -rf newfolder
 history | grep "mkdir"
 ```
 
-### chmod 修改文件权限。
-
-如果你希望一个文件有可执行权限：
-
-```bash
-chmod a+x <file>
-```
-
 ## 工具安装
 
 在开始配置 fdxk 的开发环境之前，请先安装以下的开发工具，它们是配置 fdxk 环境所必须的
@@ -133,24 +139,31 @@ chmod a+x <file>
 
 - terminal
     - linux 式的命令终端
+    - linux 发行版一般都自带终端
+    - windows 上推荐 Windows Terminal + WSL2
 - npm、yarn、pip3 (python)
-    - 包管理工具
+    - 因为 fdxk 前后端项目都是用的 typescript 开发，所以需要安装 nodejs 环境
+    - npm 和 yarn 分别为后端和前端的 nodejs 包管理工具
     - 根据不同的操作系统在 terminal 中安装
+    - 建议安装 nvm 方便管理 nodejs 的版本
 - git
     - 版本管理工具
-    - 学习 github flow
-    - [https://guides.github.com/introduction/flow/](https://guides.github.com/introduction/flow/)
+    - 学习 github flow [https://guides.github.com/introduction/flow/](https://guides.github.com/introduction/flow/)
+    - fdxk 项目都在 github 上托管，采用 github workflow 进行协作
 - docker，docker-compose
-    - 让程序在轻量化虚拟机中运行
-    - 安装与系统环境匹配的版本
+    - docker 是时下非常流行的容器技术，fdxk 的后端服务是 docker 化的，并使用 docker-compose 进行部署
+    - 容器可以理解为轻量化的虚拟机
+    - [docker 从入门到实践](https://yeasy.gitbook.io/docker_practice/) 是非常好的一本参考书
+    - 安装与系统环境匹配的 docker 版本
     - 执行 `docker -v`  检测是否在命令行中安装，并检查版本
     - 安装 docker-compose ： `pip3 install docker-compose`
 - typescript
     - `npm install typescript`
     - `npx tsc -v ` 检测是否安装成功，并检查版本
 - nestjs
+    - fdxk 的后端框架为 nestjs
     - 前往官网教程
-    - https://docs.nestjs.com
+    - [https://docs.nestjs.com](https://docs.nestjs.com)
 
 ## 下载代码
 
@@ -202,7 +215,7 @@ yarn dev
 运行以下命令构建 docker-compose
 
 ```bash
-docker-compose -f docker-compose.yml build
+docker-compose -f docker-compose-dev.yml build
 ```
 
 运行以下命令以运行 docker-compose
@@ -217,7 +230,7 @@ docker-compose -f docker-compose-dev.yml up
 docker ps
 ```
 
-下一步，进入 api 所在的 docker (从上一条命令中查看 today-backend_api 所对应的 container id )
+下一步，进入 api 所在的 docker (从上一条命令中查看 `today-backend_api` 所对应的 container id )
 
 ```bash
 docker exec -it 4cdbb6187be3 /bin/sh
@@ -243,7 +256,7 @@ npx typeorm migration:run
 
 点击底部最右侧登陆选项可以进行注册，获取验证码可以在 mysql 数据库中查看，如果联网能收到邮件验证码
 
-执行以下命令可以看到在后端服务器中的 mysql 数据信息（ [docker_mysql] 需替换）
+执行以下命令可以看到在后端服务器中的 mysql 数据信息（ `[docker_mysql]` 需替换）
 
 第一行docker会执行 mysql 虚拟机中 /bin/sh 的虚拟机，也就是 mysql 所在系统的命令行
 
@@ -298,12 +311,12 @@ export DOCKER_BUILDKIT=0
 export COMPOSE_DOCKER_CLI_BUILD=0
 ```
 
-### mac m1 不支持 mysql 8.0
+### Mac M1 不支持 mysql 8.0
 
-docker-compose 中修改 mysql: image 项来修改为支持 arm 的 8.0.23 版本
+现在的 docker-compose 中使用的 mysql 镜像暂时还不支持 ARM 架构，因此需要将 `mysql: image` 项来修改为支持 arm 的 8.0.23 版本
 
 ```bash
-image:"mysql/mysql-server:8.0.23"
+image: "mysql/mysql-server:8.0.23"
 ```
 
 ### 后端 mysql 跑不起来，提示 ip 地址没有权限
