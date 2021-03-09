@@ -1,0 +1,934 @@
+<!-- Fix MathJax rendering on iOS Safari due to rendering long numbers as phone numbers. -->
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="技术分享、讨论与学习">
+      
+      
+      
+        <meta name="author" content="FDUCSLG">
+      
+      
+        <link rel="canonical" href="https://cslg.info/blog/2021-03-07-fdxk-env-config/">
+      
+      <link rel="shortcut icon" href="../../static/assets/logo.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.5">
+    
+<meta name="format-detection" content="telephone=no">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48NJ9M3XH1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-48NJ9M3XH1');
+</script>
+
+    
+      
+        <title>fdxk开发环境配置 - FDUCSLG</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.77f3fd56.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="blue">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fdxk" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://cslg.info/" title="FDUCSLG" class="md-header__button md-logo" aria-label="FDUCSLG">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.35 10.03A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.03A6.004 6.004 0 0 0 0 14a6 6 0 0 0 6 6h13a5 5 0 0 0 5-5c0-2.64-2.05-4.78-4.65-4.97z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FDUCSLG
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              fdxk开发环境配置
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/fducslg/fducslg/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fducslg/fducslg
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://cslg.info/" title="FDUCSLG" class="md-nav__button md-logo" aria-label="FDUCSLG">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.35 10.03A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.03A6.004 6.004 0 0 0 0 14a6 6 0 0 0 6 6h13a5 5 0 0 0 5-5c0-2.64-2.05-4.78-4.65-4.97z"/></svg>
+
+    </a>
+    FDUCSLG
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/fducslg/fducslg/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fducslg/fducslg
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" data-md-state="indeterminate" type="checkbox" id="__nav_1" checked>
+      
+      <label class="md-nav__link" for="__nav_1">
+        主页
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        欢迎
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" data-md-state="indeterminate" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        博客
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="博客" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          博客
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        博客
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    总览
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    简介
+  </a>
+  
+    <nav class="md-nav" aria-label="简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fdxkinfo" class="md-nav__link">
+    什么是fdxk.info
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    关于这篇文章
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terminal" class="md-nav__link">
+    熟悉 Terminal
+  </a>
+  
+    <nav class="md-nav" aria-label="熟悉 Terminal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ls" class="md-nav__link">
+    ls 列出当前文件夹下的所有文件和文件夹
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pwd-terminal" class="md-nav__link">
+    pwd 显示当前 terminal 所在的目录
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cd" class="md-nav__link">
+    cd 进入目录
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cat" class="md-nav__link">
+    cat 显示文件内容
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    执行文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chmod" class="md-nav__link">
+    chmod 修改文件权限。
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    clear 清空终端中存在的已经执行过的命令
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mkdir" class="md-nav__link">
+    mkdir 在当前目录下创建文件夹
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#touch" class="md-nav__link">
+    touch 在当前目录下创建文件（一般这么创建的文件是文本文件）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nano-ctrlx" class="md-nav__link">
+    nano 编辑某个文件 ，ctrl+x 退出
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mvcp" class="md-nav__link">
+    mv、cp 移动文件与复制文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rm" class="md-nav__link">
+    rm 移除某个文件/文件夹（注意不是移动到废纸篓）
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    管道
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    工具安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    下载代码
+  </a>
+  
+    <nav class="md-nav" aria-label="下载代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github" class="md-nav__link">
+    从 GitHub 下载代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    下载两个仓库
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    前端配置
+  </a>
+  
+    <nav class="md-nav" aria-label="前端配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    概览
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    后端配置
+  </a>
+  
+    <nav class="md-nav" aria-label="后端配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    概览
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    配置成功
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    可能遇到的问题
+  </a>
+  
+    <nav class="md-nav" aria-label="可能遇到的问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    无法下载问题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    docker 安装时出现问题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mac-m1-mysql-80" class="md-nav__link">
+    Mac M1 不支持 mysql 8.0
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql-ip" class="md-nav__link">
+    后端 mysql 跑不起来，提示 ip 地址没有权限
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    其他问题
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+
+                
+                  <a href="https://github.com/fducslg/fducslg/edit/master/content/blog/2021-03-07-fdxk-env-config.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="fdxk">fdxk开发环境配置<a class="headerlink" href="#fdxk" title="Permanent link">&para;</a></h1>
+<h2 id="_1">总览<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>简介</li>
+<li>熟悉terminal</li>
+<li>工具安装</li>
+<li>下载代码</li>
+<li>前端配置</li>
+<li>后端配置</li>
+<li>配置成功</li>
+<li>可能遇到的问题</li>
+</ul>
+<h2 id="_2">简介<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h4 id="fdxkinfo">什么是fdxk.info<a class="headerlink" href="#fdxkinfo" title="Permanent link">&para;</a></h4>
+<p>fdxk.info (Fudan Xuan Ke Info) 是 FDUCSLG（Fudan Unniversity Computer Science Lovers Group）旗下的网站，由复旦大学的计算机相关专业的技术爱好者们开发和维护，旨在解决复旦缺少校内信息交流渠道的问题，目前两大功能为课表、评课，后续会加入更多功能服务校内同学。</p>
+<p>目前该项目还处在积极开发之中，如果你对此感兴趣，欢迎联系我们！</p>
+<h4 id="_3">关于这篇文章<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>我是 FDUCSLG 的成员李叔禄 <a href="https://github.com/Depetrol">@Depetrol</a>，最近加入了 fdxk.info 开发组，在胡志峰学长 <a href="https://github.com/ichn-hu">@ichn-hu</a> 的指导下安装了 fdxk 的开发环境（不然我可能一周都起不来这个环境hhh），配置完成后写下这篇文章，一方面是以后的开发中可以作为速查，一方面也是方便以后的同学配置开发环境。</p>
+<h2 id="terminal">熟悉 Terminal<a class="headerlink" href="#terminal" title="Permanent link">&para;</a></h2>
+<p>本文的系统环境为 MacOS，CPU 架构为 Apple M1，下述过程在你的系统上的结果有可能不同。</p>
+<p>terminal 是系统内置的命令行，可以通过向 terminal 中输入命令来操作系统，而这在配置环境中可以为我们提供许多便利，甚至许多操作只能在 terminal 中进行</p>
+<p>下面是 terminal 中的一些操作，每输入一行命令后按 <code>enter</code> 来执行命令</p>
+<p>在下面的介绍中，标题会介绍命令的基本功能，具体的使用方法需要自己执行下面的命令观察结果</p>
+<ul>
+<li>目录操作:  <code>ls</code> <code>cd</code> <code>pwd</code> <code>rm</code></li>
+<li>文件操作:  <code>touch</code>  <code>cat</code> <code>mv</code>  <code>rm</code></li>
+<li>进程操作:  <code>top</code> 显示进程 ( <code>htop</code> : 更加便于使用的进程显示，界面更加美观，但需要额外安装 <code>brew install htop</code> ) </li>
+</ul>
+<h3 id="ls">ls 列出当前文件夹下的所有文件和文件夹<a class="headerlink" href="#ls" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>ls
+ls -a
+ls -l
+ls -h
+</code></pre></div>
+<h3 id="pwd-terminal">pwd 显示当前 terminal 所在的目录<a class="headerlink" href="#pwd-terminal" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">pwd</span>
+</code></pre></div>
+<h3 id="cd">cd 进入目录<a class="headerlink" href="#cd" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 进入根目录</span>
+<span class="nb">cd</span> /
+<span class="c1"># 进入用户家目录</span>
+<span class="nb">cd</span> ~
+<span class="c1"># 回到上层目录</span>
+<span class="nb">cd</span> ..
+</code></pre></div>
+<h3 id="cat">cat 显示文件内容<a class="headerlink" href="#cat" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>cat hello.txt
+</code></pre></div>
+<h3 id="_4">执行文件<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>./<span class="o">[</span>文件名<span class="o">]</span>
+/bin/date
+</code></pre></div>
+<h3 id="chmod">chmod 修改文件权限。<a class="headerlink" href="#chmod" title="Permanent link">&para;</a></h3>
+<p>如果你希望一个文件有可执行权限：</p>
+<div class="highlight"><pre><span></span><code>chmod a+x &lt;file&gt;
+</code></pre></div>
+<h3 id="clear">clear 清空终端中存在的已经执行过的命令<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>clear
+</code></pre></div>
+<h3 id="mkdir">mkdir 在当前目录下创建文件夹<a class="headerlink" href="#mkdir" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mkdir newfolder
+</code></pre></div>
+<h3 id="touch">touch 在当前目录下创建文件（一般这么创建的文件是文本文件）<a class="headerlink" href="#touch" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>touch hello.txt
+</code></pre></div>
+<h3 id="nano-ctrlx">nano 编辑某个文件 ，ctrl+x 退出<a class="headerlink" href="#nano-ctrlx" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>nano hello.txt
+</code></pre></div>
+<h3 id="mvcp">mv、cp 移动文件与复制文件<a class="headerlink" href="#mvcp" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mv hello.txt hi.txt
+cp hi.txt newfolder/hi.txt
+</code></pre></div>
+<h3 id="rm">rm 移除某个文件/文件夹（注意不是移动到废纸篓）<a class="headerlink" href="#rm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>rm hi.txt
+rm -d newfolder
+rm -rf newfolder
+</code></pre></div>
+<h3 id="_5">管道<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><code>|</code>: 上一个命令（程序）的输出作为下一个命令的输入</p>
+<div class="highlight"><pre><span></span><code><span class="nb">history</span> <span class="p">|</span> grep <span class="s2">&quot;mkdir&quot;</span>
+</code></pre></div>
+<h2 id="_6">工具安装<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>在开始配置 fdxk 的开发环境之前，请先安装以下的开发工具，它们是配置 fdxk 环境所必须的</p>
+<p>因为不同系统的安装情况不同，这里不会详细地列出安装的指令，只会进行一些简短的介绍，需要自行上网查找一些资料，如果出现 error 可以先在网上搜索问题来尝试解决（可以搜索 error 的提示内容），可以查看文末的“可能的问题”部分，也可以在文章下方评论来一起讨论</p>
+<ul>
+<li>terminal<ul>
+<li>linux 式的命令终端</li>
+<li>linux 发行版一般都自带终端</li>
+<li>windows 上推荐 Windows Terminal + WSL2</li>
+</ul>
+</li>
+<li>npm、yarn、pip3 (python)<ul>
+<li>因为 fdxk 前后端项目都是用的 typescript 开发，所以需要安装 nodejs 环境</li>
+<li>npm 和 yarn 分别为后端和前端的 nodejs 包管理工具</li>
+<li>根据不同的操作系统在 terminal 中安装</li>
+<li>建议安装 nvm 方便管理 nodejs 的版本</li>
+</ul>
+</li>
+<li>git<ul>
+<li>版本管理工具</li>
+<li>学习 github flow <a href="https://guides.github.com/introduction/flow/">https://guides.github.com/introduction/flow/</a></li>
+<li>fdxk 项目都在 github 上托管，采用 github workflow 进行协作</li>
+</ul>
+</li>
+<li>docker，docker-compose<ul>
+<li>docker 是时下非常流行的容器技术，fdxk 的后端服务是 docker 化的，并使用 docker-compose 进行部署</li>
+<li>容器可以理解为轻量化的虚拟机</li>
+<li><a href="https://yeasy.gitbook.io/docker_practice/">docker 从入门到实践</a> 是非常好的一本参考书</li>
+<li>安装与系统环境匹配的 docker 版本</li>
+<li>执行 <code>docker -v</code>  检测是否在命令行中安装，并检查版本</li>
+<li>安装 docker-compose ： <code>pip3 install docker-compose</code></li>
+</ul>
+</li>
+<li>typescript<ul>
+<li><code>npm install typescript</code></li>
+<li><code>npx tsc -v</code> 检测是否安装成功，并检查版本</li>
+</ul>
+</li>
+<li>nestjs<ul>
+<li>fdxk 的后端框架为 nestjs</li>
+<li>前往官网教程</li>
+<li><a href="https://docs.nestjs.com">https://docs.nestjs.com</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="_7">下载代码<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="github">从 GitHub 下载代码<a class="headerlink" href="#github" title="Permanent link">&para;</a></h3>
+<ul>
+<li>可以使用 GitHub Desktop → Clone Repository → 保存到目标目录</li>
+</ul>
+<h3 id="_8">下载两个仓库<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>前端：https://github.com/CLDXiang/today-frontend</li>
+<li>后端：https://github.com/ichn-hu/today-backend</li>
+<li>均为 private 仓库，需要权限</li>
+</ul>
+<h2 id="_9">前端配置<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10">概览<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>fdxk 采用前后端分离的开发方式，前端负责向浏览器传输 html 文件等前端文件，后端专门处理操作请求，如数据的查找、删除等。</p>
+<p>前端使用的技术栈为</p>
+<ul>
+<li>PWA</li>
+<li>Vue</li>
+<li>目前是 Ant Design Vue，正在迁移至利用 TailwindCSS 构建的原生组件库</li>
+</ul>
+<h3 id="_11">配置<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>前端使用了 yarn 来配置环境，进入 today-frontend 目录后输入下面的代码，yarn 会读取 package.json 并下载全部的依赖包，并开始运行</p>
+<div class="highlight"><pre><span></span><code>yarn                      <span class="o">(</span>为 yarn install 缩写<span class="o">)</span>
+yarn dev
+</code></pre></div>
+<h2 id="_12">后端配置<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h3 id="_13">概览<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>后端使用的技术栈为</p>
+<ul>
+<li>Typescript</li>
+<li>nestjs</li>
+<li>mysql</li>
+</ul>
+<h3 id="_14">配置<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>后端的环境配置需要使用 docker 和 docker-compose 。后端会运行三个 docker: api, mysql, redis，而 docker-compose 可以把三个 docker 联合运行，就不用手动启动三次 docker 了</p>
+<p>运行以下命令构建 docker-compose</p>
+<div class="highlight"><pre><span></span><code>docker-compose -f docker-compose-dev.yml build
+</code></pre></div>
+<p>运行以下命令以运行 docker-compose</p>
+<div class="highlight"><pre><span></span><code>docker-compose -f docker-compose-dev.yml up
+</code></pre></div>
+<p>输入以下命令显示 docker 正在运行的项目</p>
+<div class="highlight"><pre><span></span><code>docker ps
+</code></pre></div>
+<p>下一步，进入 api 所在的 docker (从上一条命令中查看 <code>today-backend_api</code> 所对应的 container id )</p>
+<div class="highlight"><pre><span></span><code>docker <span class="nb">exec</span> -it 4cdbb6187be3 /bin/sh
+</code></pre></div>
+<p>进入容器后，所在目录为 /app，执行以下命令创建配置文件</p>
+<div class="highlight"><pre><span></span><code>cp ormconfig.json.example ormconfig.json
+</code></pre></div>
+<p>最后，执行下面的命令执行 migration</p>
+<div class="highlight"><pre><span></span><code>npx typeorm migration:run
+</code></pre></div>
+<h2 id="_15">配置成功<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p>在浏览器中访问 <a href="http://localhost:8080">localhost:8080</a> 会得到如下页面</p>
+<p><img alt="配置成功" src="../../static/assets/fdxk-env-set.png" /></p>
+<p>点击底部最右侧登陆选项可以进行注册，获取验证码可以在 mysql 数据库中查看，如果联网能收到邮件验证码</p>
+<p>执行以下命令可以看到在后端服务器中的 mysql 数据信息（ <code>[docker_mysql]</code> 需替换）</p>
+<p>第一行docker会执行 mysql 虚拟机中 /bin/sh 的虚拟机，也就是 mysql 所在系统的命令行</p>
+<p>第二行输入 mysql 的用户名，密码需要手动输入 password</p>
+<p>第三行会显示所有的数据库</p>
+<p>第四行进入 today 数据库</p>
+<p>第五行进入 mail 数据表</p>
+<p>第六行显示 mail 数据表，数据表最右面的一列六位数就是验证码</p>
+<div class="highlight"><pre><span></span><code>docker <span class="nb">exec</span> -it <span class="o">[</span>docker_mysql<span class="o">]</span> /bin/sh
+mysql -u root -p
+show databases
+use today
+show tables
+<span class="k">select</span> * from mail
+</code></pre></div>
+<h2 id="_16">可能遇到的问题<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<h3 id="_17">无法下载问题<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>使用以下命令来查看命令行连接公网的 ip 地址，可以 google 一下 where is + ip 来查看ip所在的位置</p>
+<div class="highlight"><pre><span></span><code>curl ip.sb
+</code></pre></div>
+<p>使用以下命令在命令行中开启代理（127.0.0.1:1087为本地的代理端口，在你的电脑上可能不同）</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:1087<span class="p">;</span>
+<span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:1087<span class="p">;</span>
+</code></pre></div>
+<h3 id="docker">docker 安装时出现问题<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h3>
+<p>错误提示：</p>
+<div class="highlight"><pre><span></span><code>failed to solve with frontend dockerfile.v0
+</code></pre></div>
+<p>可能的解决方案：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">DOCKER_BUILDKIT</span><span class="o">=</span><span class="m">0</span>
+<span class="nb">export</span> <span class="nv">COMPOSE_DOCKER_CLI_BUILD</span><span class="o">=</span><span class="m">0</span>
+</code></pre></div>
+<h3 id="mac-m1-mysql-80">Mac M1 不支持 mysql 8.0<a class="headerlink" href="#mac-m1-mysql-80" title="Permanent link">&para;</a></h3>
+<p>现在的 docker-compose 中使用的 mysql 镜像暂时还不支持 ARM 架构，因此需要将 <code>mysql: image</code> 项来修改为支持 arm 的 8.0.23 版本</p>
+<div class="highlight"><pre><span></span><code>image: <span class="s2">&quot;mysql/mysql-server:8.0.23&quot;</span>
+</code></pre></div>
+<h3 id="mysql-ip">后端 mysql 跑不起来，提示 ip 地址没有权限<a class="headerlink" href="#mysql-ip" title="Permanent link">&para;</a></h3>
+<p>错误信息：</p>
+<div class="highlight"><pre><span></span><code>ERROR: Host <span class="s1">&#39;172.18.0.1&#39;</span> is not allowed to connect to this MySQL server
+</code></pre></div>
+<p>解决方法：</p>
+<div class="highlight"><pre><span></span><code>CREATE USER <span class="s1">&#39;root&#39;</span>@<span class="s1">&#39;%&#39;</span> IDENTIFIED BY <span class="s1">&#39;password&#39;</span><span class="p">;</span>
+GRANT ALL PRIVILEGES ON *. * TO <span class="s1">&#39;root&#39;</span>@<span class="s1">&#39;%&#39;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="_18">其他问题<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>可以在文章下方评论～</p>
+                
+              
+
+
+
+<div id="authors" class="md-source-date">
+  <small>
+	本页贡献者:
+	
+		<a href="https://github.com/虎" title="虎">
+		虎 100.0%
+		</a>
+  </small>
+</div>
+<script type="text/javascript">
+	const title = document.querySelector("h1");
+	const authors = document.querySelector("#authors");
+	console.log(authors, title, title.nextSibling)
+	title.parentNode.insertBefore(authors, title.nextSibling);
+</script>
+
+
+
+              
+<script src="https://utteranc.es/client.js"
+        repo="fducslg/fducslg"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Built by <a href="http://github.com/fducslg">FDUCSLG</a> &copy; 2020
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/fducslg" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["tabs", "navigation.expand"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.5cf3e710.min.js"></script>
+      
+    
+  </body>
+</html>
