@@ -13,9 +13,9 @@
 
 ## 简介
 
-#### 什么是fdxk.info
+#### 什么是 [fdxk.info](fdxk.info)
 
-fdxk.info (Fudan Xuan Ke Info) 是 FDUCSLG（Fudan Unniversity Computer Science Lovers Group）旗下的网站，由复旦大学的计算机相关专业的技术爱好者们开发和维护，旨在解决复旦缺少校内信息交流渠道的问题，目前两大功能为课表、评课，后续会加入更多功能服务校内同学。
+[fdxk.info](fdxk.info) (Fudan Xuan Ke Info) 是 FDUCSLG（Fudan Unniversity Computer Science Lovers Group）旗下的网站，由复旦大学的计算机相关专业的技术爱好者们开发和维护，旨在解决复旦缺少校内信息交流渠道的问题，目前两大功能为课表、评课，后续会加入更多功能服务校内同学。
 
 目前该项目还处在积极开发之中，如果你对此感兴趣，欢迎联系我们！
 
