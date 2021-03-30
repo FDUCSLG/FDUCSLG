@@ -35,19 +35,22 @@
 " 感谢胡志峰学长(https://github.com/ichn-hu) 的指导和李叔禄(https://github.com/Depetrol)的支持！感谢！" * 10086
 ```
 
+!!! note
+    " 感谢胡志峰学长(https://github.com/ichn-hu) 的指导和李叔禄(https://github.com/Depetrol)的支持！感谢！" * 10086
+
 
 
 # 准备工作： 
 
 ## 检查 Windows 版本：
 
- `Windows + R`键开启“运行”，输入`winver`，查看您的 Windows 版本，这将是检查您的系统能否使用WSL（Windows Subsystem for Linux）功能的重要依据。
+ `Windows + R` 键开启“运行”，输入 `winver`，查看您的 Windows 版本，这将是检查您的系统能否使用 WSL（Windows Subsystem for Linux）功能的重要依据。
 
 ![fdxk-win-set-1](../static/assets/fdxk-win-nev-set-1.png)
 
 ## 以管理员身份打开命令行 / Power shell
 
-在本经验贴中，您往往会遇到需要一定权限才能使用的命令，这需要您以管理员身份启动命令行 / `Power shell`；您可以通过`Windows + S`键启用搜索，输入`powershell`，在弹出界面中选择“以管理员身份启动”即可。命令行同理。
+在本经验贴中，您往往会遇到需要一定权限才能使用的命令，这需要您以管理员身份启动命令行 / `Power shell`；您可以通过 `Windows + S` 键启用搜索，输入 `powershell` ，在弹出界面中选择“**以管理员身份启动**”即可。命令行同理。
 
 ![fdxk-win-set-2](../static/assets/fdxk-win-nev-set-2.png)
 
@@ -57,13 +60,13 @@
 
 ## 安装 WSL2
 
- 根据 Windows 版本的不同，WSL2 有简易安装和手动安装两种模式。
+根据 Windows 版本的不同，WSL2 有简易安装和手动安装两种模式。
 
 简易安装需要您的 Windows 版本是预览版（OS 版本20262或更高）且需要加入 Windows 预览体验计划。
 
- 手动安装对于 Windows 的版本要求：
+手动安装对于 Windows 的版本要求：
 
-对于 x64 系统：**版本** **1903** 或更高版本，采用 **内部版本** **18362** 或更高版本。
+对于 x86-64 系统：**版本** **1903** 或更高版本，采用 **内部版本** **18362** 或更高版本。
 
 对于 ARM64 系统：**版本** **2004** 或更高版本，采用 **内部版本** **19041** 或更高版本。
 
@@ -101,7 +104,7 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 ##### 下载 WSL2 升级包：
 
-点击[链接](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi )下载并运行即可.
+点击[链接](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)下载并运行即可.
 
 ##### 将 WSL2 设置为默认版本：
 
@@ -135,8 +138,6 @@ Docker 是一种工具，用于创建、部署和运行应用程序（通过 Con
 
 [下载链接](https://docs.docker.com/docker-for-windows/wsl/#download )
 
-[docker]: https://docs.docker.com/docker-for-windows/wsl/#download
-
 #### 设置Docker
 
 在 Docker 中点击设置——general——use the WSL 2 based engine
@@ -147,7 +148,7 @@ Docker 是一种工具，用于创建、部署和运行应用程序（通过 Con
 
 ## 安装docker-compose
 
-此部分将会教您安装 docker-compose，并且会让您写出一个简易的 docker-compose 应用案例（网页）
+此部分将会教您安装 `docker-compose`，并且会让您写出一个简易的 docker-compose 应用案例（网页）
 
 ####  输入
 
@@ -169,7 +170,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ------
 
-/*以下步骤为建立一个 docker-compose 的使用案例，如想要直接启动后端文件，请直接跳到下一节*/
+*以下步骤为建立一个 docker-compose 的使用案例，如想要直接启动后端文件，请直接跳到下一节*
 
 #### 建立一个 docker-compose.yml 文件
 
@@ -263,23 +264,20 @@ docker-compose
 
 ------
 
-
-
 ## 生成 git access ssh token
 
 #### 生成 SSH key 并把它加入 ssh-agent
 
 - 打开 Ubuntu（Git Bash 也行）输入：
 
-
 ```
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
+ 其中 ed25519 是指定的 key 名称，你可以任意指定自己想用的名称，并把后文中出现的 ed25519 替换成你指定的。
 
- 这将会生成一个新的 SSH key，然后在弹出的储存 key 的界面回车保存 key 文件。再输入一个secure passphrase.
+ 这将会生成一个新的 SSH key，然后在弹出的储存 key 的界面回车保存 key 文件，再随机输入一个 secure passphrase，这里也可以留空直接按回车键。
 
 - 把SSH key加入ssh-agent
-
 
 还是在Ubuntu/Git Bash中输入：
 
@@ -293,9 +291,9 @@ eval `ssh-agent -s`
 ssh-add ~/.ssh/id_ed25519
 ```
 
- （如果你的key名字不太一样，请把id_ed25519改成在第一步中保存key时见到的名字）
+ （如果你的 key 名字不太一样，请把 id_ed25519 改成在第一步中保存 key 时见到的名字）
 
-####   把新的 SSH key 加入到你的 Github 账户
+#### 把新的 SSH key 加入到你的 Github 账户
 
 - 复制 SSH key 到剪切板
 
@@ -312,9 +310,12 @@ clip < ~/.ssh/id_ed25519.pub
 
 ![github 添加界面](../static/assets/fdxk-win-nev-set-4.png)
 
-克隆前后端代码到 Ubuntu
+## 克隆前后端代码到 Ubuntu
 
-在 Ubuntu 的目录里面，但是最好不要在 /.ssh 里面，找一个进去，执行下列命令（第一个是后端，第二个是前端）；如果太慢，建议换网。
+在 Ubuntu 的 home 目录下新建一个工作目录，名字任取但建议不要带空格（如 `Projects`、`MyProjects` 等等），进去后，执行下列命令从 GitHub 上获取前后端代码（第一个是后端，第二个是前端）；如果太慢，建议换网或开启代理。
+
+!!! warning
+    目前 fdxk.info 的代码尚未开源，因此你需要提前联系我们获得代码仓库的访问权限。前端代码考虑在未来两三个月左右开源，但后端代码出于安全考虑，可能会放缓开源计划，但任然敬请期待。
 
 ```
 git clone git@github.com:ichn-hu/today-backend.git 
@@ -334,13 +335,8 @@ git clone git@github.com:CLDXiang/today-frontend.git
 
 这里提前说一下成功标准，两条有一条就可以；成功了就去下一步吧。
 
-```
 1. 命令行最后一行出现含有 redis_1 | 和 时间 和 ready to accept connections 字样的输出
-```
-
-```
 2.  访问localhost:8000，网页内容符合刚刚写入的html文件
-```
 
 打开docker客户端，setting->Resource->WSL Integration，把 Ubuntu 对应的开关打开。若该页面有未勾选的选项（一般没有），勾之。现在可以关掉 docker。
 
@@ -390,7 +386,7 @@ npx typeorm migration:run
 
 ## 启动前端
 
-提前说一下成功标准：命令行提示可以使用两个 ip地址访问前端，一个是
+提前说一下成功标准：命令行提示可以使用两个 ip 地址访问前端，一个是
 
 ```
 localhost:8080
