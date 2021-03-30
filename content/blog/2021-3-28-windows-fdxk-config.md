@@ -1,22 +1,5 @@
 # fdxk.info 后端开发在 win10 上的配置
 
-####  目录
-
-- 简介
-
-
-- 准备工作
-
-
-- 正式安装内容
-
-
-- 独立重复实验
-
-
-- 可能遇到的问题
-
-
 # 简介
 
 #### 什么是 [fdxk.info](https://cslg.info/blog/2021-03-07-fdxk-env-config/fdxk.info)[¶](https://cslg.info/blog/2021-03-07-fdxk-env-config/#fdxkinfo)
