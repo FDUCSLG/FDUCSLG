@@ -1,0 +1,587 @@
+<!-- Fix MathJax rendering on iOS Safari due to rendering long numbers as phone numbers. -->
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="技术分享、讨论与学习">
+      
+      
+      
+        <meta name="author" content="FDUCSLG">
+      
+      
+        <link rel="canonical" href="https://cslg.info/blog/2021-04-01-dockerfile/">
+      
+      <link rel="icon" href="../../static/assets/logo.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
+    
+<meta name="format-detection" content="telephone=no">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48NJ9M3XH1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-48NJ9M3XH1');
+</script>
+
+    
+      
+        <title>2021 04 01 dockerfile - FDUCSLG</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.33e2939f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#docker-fdxkinfo" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="FDUCSLG" class="md-header__button md-logo" aria-label="FDUCSLG" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.35 10.03A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.03A6.004 6.004 0 0 0 0 14a6 6 0 0 0 6 6h13a5 5 0 0 0 5-5c0-2.64-2.05-4.78-4.65-4.97z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FDUCSLG
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2021 04 01 dockerfile
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/fducslg/fducslg/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fducslg/fducslg
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="FDUCSLG" class="md-nav__button md-logo" aria-label="FDUCSLG" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.35 10.03A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.03A6.004 6.004 0 0 0 0 14a6 6 0 0 0 6 6h13a5 5 0 0 0 5-5c0-2.64-2.05-4.78-4.65-4.97z"/></svg>
+
+    </a>
+    FDUCSLG
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/fducslg/fducslg/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fducslg/fducslg
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" data-md-state="indeterminate" type="checkbox" id="__nav_1" checked>
+      
+      <label class="md-nav__link" for="__nav_1">
+        主页
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="主页" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        欢迎
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" data-md-state="indeterminate" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        博客
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="博客" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          博客
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        博客
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+
+                
+                  <a href="https://github.com/fducslg/fducslg/edit/master/content/blog/2021-04-01-dockerfile.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a href="https://fdxk.info">fdxk.info</a> 是 FDUCSLG（Fudan Unniversity Computer Science Lovers Group）旗下的网站，由复旦大学的计算机相关专业的技术爱好者们开发和维护，旨在解决复旦缺少校内信息交流渠道的问题，目前两大功能为课表、评课，后续会加入更多功能服务校内同学。</p>
+<p>目前该项目还处在积极开发之中，如果你对此感兴趣，欢迎联系我们！</p>
+</div>
+<h1 id="docker-fdxkinfo">docker 在 fdxk.info 后端中的应用与优化<a class="headerlink" href="#docker-fdxkinfo" title="Permanent link">&para;</a></h1>
+<h1 id="_1">背景介绍<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><a href="http://fdxk.info">fdxk.info</a> 后端服务采用 nestjs + typescript 构建，并通过 docker 和 docker-compose 进行部署，本文将介绍 docker 在后端中的应用，以及我们针对 nodejs 构建的后端服务对 dockerfile 进行的优化。</p>
+<h2 id="docker">什么是 docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
+<p>docker 是基于容器技术实现的环境隔离的运行时。所谓的容器（container）可以理解成非常轻量级的虚拟机（但不是），底层采用 linux kernel 提供的 namespace、cgroup 等技术实现资源隔离，让用户的进程可以跑在 kernel 的原生进程上，从而可以提供几乎零损失的隔离抽象（相比于虚拟机的译码执行或者对硬件的模拟），并且可以快速地启动大量容器。</p>
+<p>更详细的关于 docker 历史以及 docker 和虚拟机的对比，可以参考<a href="https://yeasy.gitbook.io/docker_practice/introduction/what">什么是 docker</a> 、<a href="https://yeasy.gitbook.io/docker_practice/introduction/why">为什么要用 Docker</a> 。</p>
+<p>关于安装 docker 和配置，可以参考<a href="https://yeasy.gitbook.io/docker_practice/install">安装 docker</a> 和<a href="https://yeasy.gitbook.io/docker_practice/install/mirror">镜像加速器</a>。</p>
+<h2 id="_2">基本概念与基本操作<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>关于 docker 有一些基本的概念需要清楚。</p>
+<p>docker image 类似虚拟机镜像，一个 image 严格定义了一个 docker 容器的环境。我们可以方便地从 docker hub 等 registry 服务提供商下载别人定义好的 docker image，譬如 <code>docker pull mysql:8.0</code> 就可以从官方的 docker hub 拉取 mysql 8.0 镜像。</p>
+<p>我们也可以通过编写 Dockerfile 来自定义 docker image。Dockerfile 就像菜谱一样，描述了一个 image 是如何被构建出来的。譬如</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">node:14-alpine</span>
+<span class="c"># install the myslq-client so that we could run scripts in the api container</span>
+<span class="k">RUN</span> apk update <span class="o">&amp;&amp;</span> <span class="se">\</span>
+    apk add mysql-client
+<span class="k">RUN</span> mkdir -p /home/node/app/node_modules <span class="o">&amp;&amp;</span> chown -R node:node /home/node/app
+<span class="k">WORKDIR</span><span class="s"> /home/node/app</span>
+<span class="k">COPY</span> --chown<span class="o">=</span>node:node package*.json ./
+<span class="k">USER</span><span class="s"> node</span>
+<span class="k">RUN</span> npm config <span class="nb">set</span> registry http://registry.npm.taobao.org/
+<span class="k">RUN</span> npm install --verbose
+<span class="k">COPY</span> --chown<span class="o">=</span>node:node . .
+<span class="k">RUN</span> npm run build
+<span class="k">EXPOSE</span><span class="s"> 3000</span>
+<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;npm&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="s2">&quot;start:prod&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>这便是 fdxk 现在的后端所使用的 docker image 的 Dockerfile 文件。第一行 <code>FROM node:14-alpine</code> 指明了一个基础镜像，在构建的时候从 registry 拉取，后续的操作将在该镜像上进行；第二行是在这个镜像内安装必要的软件（mysql-client，这一步取决于基础镜像是什么），往后的每一步都会以在 docker 中执行一些操作（如复制文件进入 docker 或者运行指令），docker 会对每一步操作进行缓存，在未来如果前面的步骤的副作用没有发生改变（如复制的文件没改变），那么就可以直接使用缓存继续构建，从而大大加快构建速度。这也是后文会提到的优化之处的原理。</p>
+<p>获得镜像之后，我们便可以实例化一个镜像运行起来。运行着的镜像被称为容器（container）。以 MySQL 举例。</p>
+<ol>
+<li>首先通过 <code>docker pull mysql:8.0</code> 获取镜像</li>
+<li>
+<p>运行容器</p>
+<div class="highlight"><pre><span></span><code><span class="c"># -e 指明提供给容器的环境变量，这里指明了 MySQL root 的密码</span>
+<span class="c"># -p 指明了端口转发，把容器内的 3306 端口转发到 host 的 3306 端口</span>
+<span class="c"># -d 让容器以 detach 的状态运行在背景中</span>
+docker run -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>xxxx -p <span class="m">3306</span>:3306 -d mysql:8.0
+</code></pre></div>
+</li>
+<li>
+<p>运行后，通过 <code>docker ps</code> 查看现有的容器，结果如下所示</p>
+<div class="highlight"><pre><span></span><code>$ docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS                               NAMES
+b29267fcd1c2   mysql:8.0   <span class="s2">&quot;docker-entrypoint.s…&quot;</span>   <span class="m">2</span> minutes ago   Up <span class="m">2</span> minutes   <span class="m">0</span>.0.0.0:3306-&gt;3306/tcp, <span class="m">33060</span>/tcp   laughing_goldstine
+</code></pre></div>
+</li>
+<li>
+<p>获取到 CONTAINER ID 后（这里为 <code>b29267fcd1c2</code>），通过 <code>docker exec -it b29267fcd1c2 /bin/sh</code> 命令，可以进入到容器之中，并执行容器中的 shell 交互</p>
+</li>
+<li>在新进入的交互命令行中输入 <code>mysql -uroot -p</code> 然后输入你创建容器时通过 <code>-e MYSQL_ROOT_PASSWORD=xxxx</code> 指定的密码，即可操作 MySQL</li>
+<li>如果你本地有 MySQL client，那么你不需要进入容器也能操作 MySQL，因为容器内的 MySQL 监听的 3306 端口已经通过 docker 转发到你宿主操作系统上的 3306 端口，因此你可以直接在 host 的命令行中执行 <code>mysql -uroot --protocol=tcp -p</code> 即可操作容器中的 MySQL</li>
+<li>当你不需要这个 MySQL 容器的时候，你可以通过 <code>docker down b29267fcd1c2</code> 关闭它，然后在 <code>docker ps -a</code> 中看到关闭的容器列表。然后你可通过 <code>docker rm xxx</code> 删除 CONTAINER ID 为 xxx 的容器。</li>
+</ol>
+<p>如果从 host 通过 mysqljs 访问 docker 内的 MySQL 遇到下述报错：</p>
+<p><code>ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client</code></p>
+<p>你需要进入 MySQL 给你的用户添加 <code>native_password</code> 的支持。方法为首先进入 MySQL container</p>
+<p><code>docker exec -it CONTAINER_ID /bin/sh</code></p>
+<p>然后以 root 的身份进入 MySQL</p>
+<p><code>mysql --user=root --password</code></p>
+<p>再通过下述命令重新指明密码</p>
+<p><code>ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'password';</code></p>
+<p>更多关于 docker 的内容，强烈建议读者参考《<a href="https://yeasy.gitbook.io/docker_practice/">Docker —— 从入门到实践</a>》一书。</p>
+<h2 id="docker_1">为什么用 docker<a class="headerlink" href="#docker_1" title="Permanent link">&para;</a></h2>
+<p><a href="http://fdxk.info">fdxk.info</a> 使用 docker 主要有两个原因</p>
+<ol>
+<li>获得本地和线上一致的运行环境，降低测试、部署的难度。譬如上例中的 MySQL 容器，在安装好 docker 后可以轻易地运行起来，而且所有人的版本、环境都是一致的。</li>
+<li>通过 docker-compose 可以方便地启动和管理多个后端组件，现在已经使用的有 API server（即我们自行开发的服务端）、MySQL 以及 Redis，未来还可能会加入 elastic search 等组件。</li>
+</ol>
+<h1 id="dockerfile">Dockerfile 优化<a class="headerlink" href="#dockerfile" title="Permanent link">&para;</a></h1>
+<p>终于进入到正题！</p>
+<p><a href="http://fdxk.info">fdxk.info</a> 的后端服务使用 docker 进行部署，因此需要为之编写 Dockerfile 来描述镜像。上文提到的 Dockerfile 镜像就是之前 fdxk.info 所使用的镜像文件。</p>
+<p>我们从第三行开始逐行讲解每一行的用意。</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">node:14-alpine</span>
+<span class="c"># install the myslq-client so that we could run scripts in the api container</span>
+<span class="k">RUN</span> apk update <span class="o">&amp;&amp;</span> <span class="se">\</span>
+    apk add mysql-client
+<span class="k">RUN</span> mkdir -p /home/node/app/node_modules <span class="o">&amp;&amp;</span> chown -R node:node /home/node/app
+<span class="k">WORKDIR</span><span class="s"> /home/node/app</span>
+<span class="k">COPY</span> --chown<span class="o">=</span>node:node package*.json ./
+<span class="k">USER</span><span class="s"> node</span>
+<span class="k">RUN</span> npm config <span class="nb">set</span> registry http://registry.npm.taobao.org/
+<span class="k">RUN</span> npm install --verbose
+<span class="k">COPY</span> --chown<span class="o">=</span>node:node . .
+<span class="k">RUN</span> npm run build
+<span class="k">EXPOSE</span><span class="s"> 3000</span>
+<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;npm&quot;</span><span class="p">,</span> <span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="s2">&quot;start:prod&quot;</span><span class="p">]</span>
+</code></pre></div>
+<ul>
+<li><code>RUN</code> 是在 docker 中执行命令，后面的 <code>mkdir -p /home/node/app/node_modules &amp;&amp; chown -R node:node /home/node/app</code> 便是希望被执行的命令，它创建了 <code>/home/node/app/node_modules</code> 目录，并且把 <code>/home/node/app</code> 的权限修改为 node 用户组所有。之前提到过，Dockerfile 中的每一行都会在 image 中创建新的一层，这里用 <code>&amp;&amp;</code> 来连接两个命令，目的就是为了减少 docker 的层数。</li>
+<li><code>WORKDIR /home/node/app</code> 指定之后的工作目录，所有的操作都以 <code>/home/node/app</code> 为当前目录。</li>
+<li><code>COPY --chown=node:node package*.json ./</code> 把 <code>package*.json</code> 文件复制到 docker 内的当前目录。这里的 <code>package*.json</code> 采用了通配符，表示以 <code>package</code> 开头，<code>.json</code> 结尾的所有文件。注意到，执行这个命令的视角是在构建 docker image，所以这里匹配的文件是在 Dockerfile 所在的宿主机器的文件夹内的，而复制到 <code>./</code> 则是在 docker image 内。</li>
+<li><code>USER node</code> 切换用户为 <code>node</code></li>
+<li><code>RUN npm config set registry [http://registry.npm.taobao.org/](http://registry.npm.taobao.org/)</code> 因为 <a href="http://fdxk.info">fdxk.info</a> 后端采用 nodejs，所以需要使用 npm 安装依赖，而考虑到在国内网络的问题，这里配置使用淘宝镜像</li>
+<li><code>RUN npm install --verbose</code> 依据之前复制到镜像内的 <code>package*.json</code> 文件安装依赖，额外采用 <code>—verbose</code> 可以在安装的时候输出更多日志，方便知道安装的进度</li>
+<li><code>COPY --chown=node:node . .</code> 再次复制，把宿主机器上 Dockerfile 所在的文件夹里的所有文件都复制到 docker 镜像中的工作目录，这一步才真正复制源代码到镜像内</li>
+<li><code>RUN npm run build</code> 编译、构建后端服务</li>
+<li><code>EXPOSE 3000</code> 声明暴露 3000 端口给宿主，因为后端服务启动的时候监听的是 3000 端口，所以必须暴露到宿主才能访问</li>
+<li><code>CMD ["npm", "run", "start:prod"]</code> 指定运行镜像时默认执行的命令，即启动后端服务</li>
+</ul>
+<p>这个 Dockerfile 实际上已经进行了不少优化，譬如先复制 <code>package*.json</code> 文件，安装完依赖再复制源代码进行构建。因为依赖的变动不那么频繁，所以复制源代码前的步骤都是可以被缓存下来的，只要宿主文件夹里的 <code>package*.json</code> 没有变动（docker 可以根据时间戳等信息判断），那么前面的步骤都不需要重新执行。这个优化可以把费事费力的安装依赖的代价消除掉，只在不得不需要重新安装的时候执行。</p>
+<p>不过这样的优化还不够。</p>
+<p>因为使用这个 Dockerfile 打包出来的镜像有 492MB 大。</p>
+<div class="highlight"><pre><span></span><code>➜  today-backend git:<span class="o">(</span>shrink-docker<span class="o">)</span> docker image ls
+REPOSITORY          TAG         IMAGE ID       CREATED          SIZE
+backend-large       latest      12c829332187   <span class="m">12</span> minutes ago   492MB
+</code></pre></div>
+<p>我们通过</p>
+<div class="highlight"><pre><span></span><code>➜  today-backend git:<span class="o">(</span>shrink-docker<span class="o">)</span> docker <span class="nb">history</span> --human --format <span class="s2">&quot;{{.CreatedBy}}: {{.Size}}&quot;</span> backend-large
+<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;npm&quot;</span> <span class="s2">&quot;run&quot;</span> <span class="s2">&quot;start:prod&quot;</span><span class="p">]</span>: 0B
+<span class="k">EXPOSE</span><span class="s"> map[3000/tcp:{}]: 0B</span>
+<span class="k">RUN</span> /bin/sh -c npm run build # buildkit: <span class="m">1</span>.12MB
+<span class="k">COPY</span> . . # buildkit: <span class="m">1</span>.21MB
+<span class="k">RUN</span> /bin/sh -c npm install --verbose # build…: 339MB
+<span class="k">RUN</span> /bin/sh -c npm config <span class="nb">set</span> registry http:…: 96B
+<span class="k">USER</span><span class="s"> node: 0B</span>
+<span class="k">COPY</span> package*.json ./ # buildkit: 486kB
+<span class="k">WORKDIR</span><span class="s"> /home/node/app: 0B</span>
+<span class="k">RUN</span> /bin/sh -c mkdir -p /home/node/app/node_…: 0B
+<span class="k">RUN</span> /bin/sh -c apk update <span class="o">&amp;&amp;</span>     apk add mys…: <span class="m">33</span>.9MB
+/bin/sh -c #<span class="o">(</span>nop<span class="o">)</span>  CMD <span class="o">[</span><span class="s2">&quot;node&quot;</span><span class="o">]</span>: 0B
+/bin/sh -c #<span class="o">(</span>nop<span class="o">)</span>  ENTRYPOINT <span class="o">[</span><span class="s2">&quot;docker-entry…: 0B</span>
+/bin/sh -c #<span class="o">(</span>nop<span class="o">)</span> COPY file:238737301d473041…: 116B
+/bin/sh -c apk add --no-cache --virtual .bui…: <span class="m">7</span>.62MB
+/bin/sh -c #<span class="o">(</span>nop<span class="o">)</span>  ENV <span class="nv">YARN_VERSION</span><span class="o">=</span><span class="m">1</span>.22.5: 0B
+/bin/sh -c addgroup -g <span class="m">1000</span> node     <span class="o">&amp;&amp;</span> addu…: 103MB
+/bin/sh -c #<span class="o">(</span>nop<span class="o">)</span>  ENV <span class="nv">NODE_VERSION</span><span class="o">=</span><span class="m">14</span>.16.0: 0B
+/bin/sh -c #<span class="o">(</span>nop<span class="o">)</span>  CMD <span class="o">[</span><span class="s2">&quot;/bin/sh&quot;</span><span class="o">]</span>: 0B
+/bin/sh -c #<span class="o">(</span>nop<span class="o">)</span> ADD file:7eeea546ecde7a036…: <span class="m">5</span>.61MB
+</code></pre></div>
+<p>可以看到 docker 镜像中每一层的大小，可以发现最大的层在安装依赖。</p>
+<p>实际上并不是所有的依赖都需要在生产中被使用，因为有很多包是构建的依赖，而不是运行时的依赖。我们可以在构建完成后剔除那些依赖。</p>
+<p>优化之后的 Dockerfile 长这样：</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span> <span class="s">node:14-alpine</span> <span class="k">AS</span> <span class="s">BUILD_IMAGE</span>
+<span class="k">RUN</span> apk update <span class="o">&amp;&amp;</span> <span class="se">\</span>
+    apk add curl bash
+<span class="k">RUN</span> curl -sf https://gobinaries.com/tj/node-prune <span class="p">|</span> sh
+<span class="k">RUN</span> mkdir -p /home/node/app/node_modules <span class="o">&amp;&amp;</span> chown -R node:node /home/node/app
+<span class="k">WORKDIR</span><span class="s"> /home/node/app</span>
+<span class="k">COPY</span> --chown<span class="o">=</span>node:node package*.json ./
+<span class="k">USER</span><span class="s"> node</span>
+<span class="k">RUN</span> npm config <span class="nb">set</span> registry http://registry.npm.taobao.org/ <span class="o">&amp;&amp;</span> npm ci --verbose
+<span class="k">COPY</span> --chown<span class="o">=</span>node:node . .
+<span class="k">RUN</span> npm run build
+<span class="k">RUN</span> npm prune --production <span class="o">&amp;&amp;</span> node-prune
+<span class="k">FROM</span> <span class="s">node:14-alpine</span>
+<span class="k">WORKDIR</span><span class="s"> /home/node/app</span>
+<span class="k">USER</span><span class="s"> node</span>
+<span class="k">COPY</span> --from<span class="o">=</span>BUILD_IMAGE /home/node/app/views ./views
+<span class="k">COPY</span> --from<span class="o">=</span>BUILD_IMAGE /home/node/app/dist ./dist
+<span class="k">COPY</span> --from<span class="o">=</span>BUILD_IMAGE /home/node/app/node_modules ./node_modules
+<span class="k">EXPOSE</span><span class="s"> 3000</span>
+<span class="k">ENV</span> <span class="nv">env</span><span class="o">=</span>production
+<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;node&quot;</span><span class="p">,</span> <span class="s2">&quot;./dist/main.js&quot;</span><span class="p">]</span>
+</code></pre></div>
+<ul>
+<li>首先是第三步，安装了 <code>[node-prune](http://node-prune.sh)</code> 这个工具，用来剔除依赖</li>
+<li>然后在 <code>RUN npm prune --production &amp;&amp; node-prune</code> ，执行剔除</li>
+<li>最后我们重新使用基本镜像 <code>FROM node:14-alpine</code> ，这个技巧被称为多阶段构建（multi-stage build）。这样的目的在于区分构建时的镜像和运行时的镜像，因为我们在使用这个镜像的时候，只需要其运行时的内容，而其他构建时创建的内容则可以抛弃（譬如构建的日志文件）。</li>
+<li>在这个重新使用的基本镜像中，我们复制那些运行时必不可少的内容，如 views 文件中时不参与构建的静态内容、dist 是构建的目标文件夹、node_modules 是已经剔除掉非必须依赖的依赖文件夹。</li>
+</ul>
+<p>这样我们就可以拿到一个非常整洁的 docker 镜像。</p>
+<div class="highlight"><pre><span></span><code>➜  today-backend git:<span class="o">(</span>shrink-docker<span class="o">)</span> ✗ docker image ls
+REPOSITORY          TAG         IMAGE ID       CREATED             SIZE
+backend-small       latest      02449f947941   <span class="m">5</span> seconds ago       195MB
+</code></pre></div>
+<p>新构建的镜像只有 195MB，相比于原来的 492MB 缩减了将近 300MB 的空间。</p>
+<h2 id="docker-compose">docker-compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h2>
+<p>在 docker 的基础上，我们使用 docker-compose 来启动多个服务（mysql 和 redis），但鉴于篇幅的原因，我们将在之后再进行分享。感兴趣的同学可以看 <a href="https://github.com/docker/awesome-compose">https://github.com/docker/awesome-compose</a> 了解 docker-compose 是如何使用的。</p>
+                
+              
+
+
+
+<div id="authors" class="md-source-date">
+  <small>
+	本页贡献者:
+	
+		<a href="https://github.com/虎" title="虎">
+		虎 100.0%
+		</a>
+  </small>
+</div>
+<script type="text/javascript">
+	const title = document.querySelector("h1");
+	const authors = document.querySelector("#authors");
+	console.log(authors, title, title.nextSibling)
+	title.parentNode.insertBefore(authors, title.nextSibling);
+</script>
+
+
+
+              
+<script src="https://utteranc.es/client.js"
+        repo="fducslg/fducslg"
+        issue-term="pathname"
+        label="comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Built by <a href="http://github.com/fducslg">FDUCSLG</a> &copy; 2020
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/fducslg" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["tabs", "navigation.expand"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d892486b.min.js"></script>
+      
+    
+  </body>
+</html>
